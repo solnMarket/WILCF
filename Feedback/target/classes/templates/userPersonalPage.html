@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
-    <title>User Feedback Dashboard</title>
+    <meta charset="UTF-8">
+    <title>User Personal Page</title>
 </head>
 
-<body>
-    <div>
-        <a th:href="@{/logout}">Logout</a>
-    </div>
-    <h1>We are Gladly to hear your Feedback</h1>
-    <form th:action="@{/submitFeedback}" method="post" onsubmit="setDefaultCheckboxValue()">
-        <textarea name="feedback" required></textarea>
-        <input type="hidden" id="isPublic" name="isPublic" value="true" />
-        <input type="hidden" name="userLogin" th:value="${userName}" />
-        <input type="submit" value="Submit" />
+    <body>
+    <h1>Welcome, <span th:text="${userLogin}"> care to submit a feedback About our Wildcat Lab?</span></h1>
+
+    <form th:action="@{/submitFeedback}" method="post">
+        <label for="feedback">Your Feedback:</label><br>
+        <textarea id="feedback" name="feedback" rows="10" cols="50"></textarea><br>
+        <input type="checkbox" id="isPublic" name="isPublic">
+        <label for="isPublic">Public</label><br>
+        <input type="hidden" name="userLogin" th:value="${userLogin}"/>
+        <button type="submit">Submit Feedback</button>
     </form>
+
     <h1>Your Feedbacks</h1>
     <table>
         <thead>
@@ -27,43 +28,37 @@
         </thead>
         <tbody>
             <tr th:each="feedback : ${feedbacks}">
-                <td>
-                    <span th:if="${!feedback.editMode}" th:text="${feedback.feedbackContent}"></span>
-                    <form th:if="${feedback.editMode}" th:action="@{/updateFeedback}" method="post">
-                        <textarea name="editedFeedback" th:text="${feedback.feedbackContent}" required></textarea>
-                        <input type="hidden" name="id" th:value="${feedback.id}" />
-                        <input type="hidden" name="userLogin" th:value="${userName}" />
-                        <input type="submit" value="Update" />
-                    </form>
-                </td>
+                <td th:text="${feedback.feedbackContent}"></td>
                 <td th:text="${feedback.isPublic ? 'Public' : 'Private'}"></td>
                 <td>
+                    
                     <!-- Form for deleting feedback -->
-                    <form th:if="${!feedback.editMode}" th:action="@{/deleteFeedback}" method="post">
+                    <form th:action="@{/deleteFeedback}" method="post">
                         <input type="hidden" name="id" th:value="${feedback.id}" />
-                        <input type="hidden" name="userLogin" th:value="${userName}" />
+                        <input type="hidden" name="userLogin" th:value="${userLogin}" />
                         <button type="submit">Delete</button>
                     </form>
 
                     <!-- Form for toggling visibility -->
-                    <form th:if="${!feedback.editMode}" th:action="@{/toggleVisibility}" method="post">
+                    <form th:action="@{/toggleVisibility}" method="post">
                         <input type="hidden" name="id" th:value="${feedback.id}" />
                         <input type="hidden" name="isPublic" th:value="${!feedback.isPublic}" />
-                        <input type="hidden" name="userLogin" th:value="${userName}" />
+                        <input type="hidden" name="userLogin" th:value="${userLogin}" />
                         <button type="submit" th:text="${feedback.isPublic ? 'Make Private' : 'Make Public'}"></button>
                     </form>
 
                     <!-- Form for toggling edit mode -->
-                    <form th:if="${!feedback.editMode}" th:action="@{/toggleEditMode}" method="post">
+                    <form th:action="@{/toggleEditMode}" method="post">
                         <input type="hidden" name="id" th:value="${feedback.id}" />
                         <input type="hidden" name="editMode" th:value="true" />
-                        <input type="hidden" name="userLogin" th:value="${userName}" />
+                        <input type="hidden" name="userLogin" th:value="${userLogin}" />
                         <button type="submit">Edit</button>
                     </form>
                 </td>
             </tr>
         </tbody>
     </table>
-</body>
+
+    </body>
 
 </html>
