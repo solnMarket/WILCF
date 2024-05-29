@@ -15,6 +15,7 @@
                 <th>User</th>
                 <th>Feedback</th>
                 <th>Visibility</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,11 @@
                     <form th:action="@{/deleteFeedback}" method="post">
                         <input type="hidden" name="id" th:value="${feedback.id}" />
                         <button type="submit">Delete</button>
+                    </form>
+                    <!-- Form for moving feedback to general dashboard -->
+                    <form th:action="@{/moveToGeneral}" method="post">
+                        <input type="hidden" name="id" th:value="${feedback.id}" />
+                        <button type="submit">Move to General</button>
                     </form>
                 </td>
             </tr>
