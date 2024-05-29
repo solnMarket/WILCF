@@ -3,13 +3,23 @@
 
 <head>
     <title>Login Page</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>
+    <div class="blocks-container">
+        <div id="blocks"></div>
+    </div>
+
+    <div class="logo">
+        <a href="/"><img th:src="@{/123123.png}" alt="Logo"></a>
+    </div>
+
     <div class="form">
         <form method="post" action="/userLoginPage" th:object="${loginRequest}">
-            <h2>Login</h2>
+            <h1 id="WelcomeBack">Welcome Back</h1>
+            <p id="subtitle-login">Login to your account</p>
             <div class="input-box">
                 <input type="text" name="email" placeholder="Email" required>
             </div>

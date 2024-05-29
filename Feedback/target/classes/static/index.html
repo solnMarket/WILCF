@@ -1,13 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome Page</title>
+    <title>Wildcat Innovation Labs</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Add your stylesheet here -->
+    <script type="text/javascript" src="/js/script.js"></script>
 </head>
 <body>
-<h1>Welcome to the application</h1>
-<p>for users</p>
-<a href="/userRegisterPage">Navigate to user registration</a>
-<a href="/userLoginPage">Navigate to user login</a>
+    <nav class="nav">
+        <ul class="navbar-links">
+            <li><a href="/" class="logo-image"><img src="/123123.png" alt="Logo"></a></li>
+            <li><a href="#incubatees">Incubatees</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#thrusts">Thrusts</a></li>
+            <li><a href="#facilities">Facilities</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#feedback">Feedback</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="auth">
+            <!-- Conditionally render Login/Sign Up or Log out -->
+            <a th:if="${#authorization.expression('isAnonymous()')}" href="/userLoginPage">Login</a>
+            <a th:if="${#authorization.expression('isAnonymous()')}" href="/userRegisterPage">Sign Up</a>
+            <a th:if="${#authorization.expression('isAuthenticated()')}" href="/logout">Log out</a>
+        </div>
+    </nav>
+    <div class="image-container">
+        <div id="home"><img src="/home.png" alt="Welcome to Wildcat Innovation Labs"></div>
+        <div id="incubatees"><img src="/incubatees.jpg" alt="Incubatees"></div>
+        <div id="about"><img src="/aboutus.jpg" alt="About"></div>
+        <div id="thrusts"><img src="/thrusts.jpg" alt="Thrusts"></div>
+        <div id="facilities"><img src="/facilities.jpg" alt="Facilities"></div>
+        <div id="team"><img src="/team.jpg" alt="Team"></div>
+        <div id="feedback">Feedback</div>
+    </div>
+    <main>
+        <h1>Welcome to the application</h1>
+        <p>for users</p>
+        <a href="/userRegisterPage">Navigate to user registration</a>
+        <a href="/userLoginPage">Navigate to user login</a>
+    </main>
+    <footer>
+        <div class="image-container" id="contact"><img src="/contact.jpg" alt="Contact"></div>
+    </footer>
 </body>
 </html>
