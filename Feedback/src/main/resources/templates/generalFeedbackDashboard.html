@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>General Feedback Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>General Feedback Dashboard</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Feedback</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="feedback : ${feedbacks}">
+                <td th:text="${feedback.isPublic ? feedback.userLogin : feedback.getCensoredName()}"></td>
+                <td th:text="${feedback.feedbackContent}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

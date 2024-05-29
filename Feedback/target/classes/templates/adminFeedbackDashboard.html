@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Feedback Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>Admin Feedback Dashboard</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Feedback</th>
+                <th>Visibility</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="feedback : ${feedbacks}">
+                <td th:text="${feedback.isPublic ? feedback.userLogin : feedback.getCensoredName()}"></td>
+                <td th:text="${feedback.feedbackContent}"></td>
+                <td th:text="${feedback.isPublic ? 'Public' : 'Private'}"></td>
+                <td>
+                    <!-- Form for deleting feedback -->
+                    <form th:action="@{/deleteFeedback}" method="post">
+                        <input type="hidden" name="id" th:value="${feedback.id}" />
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <form method="get" action="/adminFeedbackDashboard">
+        <button type="submit">Refresh Dashboard</button>
+    </form>
+</body>
+
+</html>
