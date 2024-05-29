@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>User Feedback Dashboard</title>
+</head>
+
+<body>
+    <h1>Your Feedbacks</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Feedback</th>
+                <th>Visibility</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="feedback : ${feedbacks}">
+                <td>
+                    <span th:if="${!feedback.editMode}"
+                        th:text="${feedback.isPublic ? feedback.feedbackContent : 'Private Feedback'}"></span>
+                    <form th:if="${feedback.editMode}" th:action="@{/updateFeedback}" method="post">
+                        <textarea name="editedFeedback" th:text="${feedback.feedbackContent}" required></textarea>
+                        <input type="hidden" name="id" th:value="${feedback.id}" />
+                        <input type="hidden" name="userLogin" th:value="${userName}" />
+                        <input type="submit" value="Update" />
+                    </form>
+                </td>
+                <td th:text="${feedback.isPublic ? 'Public' : 'Private'}"></td>
+                <td>
+                    <!-- Form for deleting feedback -->
+                    <form th:if="${!feedback.editMode}" th:action="@{/deleteFeedback}" method="post">
+                        <input type="hidden" name="id" th:value="${feedback.id}" />
+                        <input type="hidden" name="userLogin" th:value="${userName}" />
+                        <button type="submit">Delete</button>
+                    </form>
+
+                    <!-- Form for toggling visibility -->
+                    <form th:if="${!feedback.editMode}" th:action="@{/toggleVisibility}" method="post">
+                        <input type="hidden" name="id" th:value="${feedback.id}" />
+                        <input type="hidden" name="isPublic" th:value="${!feedback.isPublic}" />
+                        <input type="hidden" name="userLogin" th:value="${userName}" />
+                        <button type="submit" th:text="${feedback.isPublic ? 'Make Private' : 'Make Public'}"></button>
+                    </form>
+
+                    <!-- Form for toggling edit mode -->
+                    <form th:if="${!feedback.editMode}" th:action="@{/toggleEditMode}" method="post">
+                        <input type="hidden" name="id" th:value="${feedback.id}" />
+                        <input type="hidden" name="editMode" th:value="true" />
+                        <input type="hidden" name="userLogin" th:value="${userName}" />
+                        <button type="submit">Edit</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/userPersonalPage(userLogin=${userName})}">Back to Personal Page</a>
+</body>
+
+</html>

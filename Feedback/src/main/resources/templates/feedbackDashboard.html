@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Feedback Dashboard</title>
+</head>
+
+<body>
+    <h1>Public Feedbacks</h1>
+    <ul>
+        <li th:each="feedback : ${feedbacks}">
+            <span th:text="${feedback.feedbackContent}"></span>
+            <span> by </span>
+            <span th:text="${feedback.userLogin}"></span>
+        </li>
+    </ul>
+</body>
+
+</html>
