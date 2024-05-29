@@ -1,91 +1,94 @@
+html {
+    scroll-behavior: smooth;
+}
 body {
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
-    background: url(https://www.google.com/url?sa=i&url=https%3A%2F%2Ftwitter.com%2FRy4nJ4m3s%2Fstatus%2F1183620751380713473&psig=AOvVaw2_HHsCIfXVoZ_aBcUbPYVW&ust=1717036678958000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLi8-5vqsYYDFQAAAAAdAAAAABAE);
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-body::before {
-    top: 10;
-    bottom: 10;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.form {
-    position: absolute;
-    top: 50%;
-    left: 25%;
-    transform: translate(-50%, -50%);
-    width: 350px;
-    min-height: 400px;
-    background-color: #fff;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
-    padding: 50px;
-    box-sizing: border-box;
-}
-
-.form h2 {
-    color: #777;
-    margin: 0 0 40px;
-    padding: 0;
-}
-
-.form .input-box {
-    position: relative;
-    margin: 20px 0;
-}
-
-.form .input-box input {
+  }
+.image-container img {
     width: 100%;
-    font-size: 16px;
-    border: none;
-    border-bottom: 2px solid #777;
-    outline: none;
-    padding: 10px;
-    padding-left: 30px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: 0;
     box-sizing: border-box;
-    font-weight: bold;
-    color: #777;
+    display: block;
+  }
+
+/* NAV BAR */
+.nav {
+    display: flex; /* Add this line */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding-top: 2.5%; /* Add some padding above the nav */
+    font-family: arial;
+    font-size: 15px;
+    background-color: transparent; /* Default transparent background */
+    transition: background-color 0.3s, padding-top 0.4s; /* Smooth transition for background color */
 }
 
-.form .input-box input:focus,
-.form .input-box input:valid {
-    border-bottom-color: #03a9f4;
+.nav.scrolled {
+    background-color: rgba(0, 0, 0, 0.8); /* Opaque background on scroll */
+    padding-top: 1%; /* Add some padding above the nav */
 }
 
-.form .input-box .fa {
-    position: absolute;
-    top: 8px;
-    left: 5px;
-    font-size: 18px;
-    color: #777;
+.logo-image img {
+    height: 60px; /* Adjust the height as needed */
+    width: auto; /* Let the width adjust proportionally */
+    margin: 10px;
 }
 
-.form .input-box input[type="submit"] {
-    border: none;
-    cursor: pointer;
-    background-color: #03a9f4;
-    color: #fff;
-    font-weight: bold;
-    transition: 0.5s;
+ul.navbar-links {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 60px; /* Adjust as needed */
+    padding-left: 6.3%; /* Add some padding to the left of the nav */
 }
 
-.form .input-box input[type="submit"]:hover {
-    background-color: #ff4987;
+ul.navbar-links li {
+    margin: 0 15px; /* Reduce the spacing between the links */
 }
 
-.form a {
+@media (max-width: 768px) {
+    ul.navbar-links {
+        flex-direction: column;
+    }
+
+    ul.navbar-links li {
+        margin: 5px 0;
+    }
+}
+
+ul.navbar-links a {
+    color: #9E9E9E; /* Set the text color to black */
+    text-decoration: none; /* Remove the underline from the hyperlinks */
+}
+
+ul.navbar-links a:hover {
+    text-decoration: underline; /* Add an underline on hover */
+}
+
+.auth {
+    margin-left: 30%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.auth a {
+    margin-left: 15px;
+    color: #9E9E9E;
     text-decoration: none;
-    color: #777;
-    margin-top: 20px;
-    font-weight: bold;
-    display: inline-block;
-    transition: 0.5s;
 }
 
-.form a:hover {
-    color: #ff4987;
+.auth a:hover {
+    text-decoration: underline;
 }
+
