@@ -8,13 +8,12 @@
 <h1>Welcome, <span th:text="${userLogin}"> care to submit a feedback About our Wildcat Lab?</span></h1>
 
 <form th:action="@{/submitFeedback}" method="post">
-    <label for="feedback">Your Feedback:</label><br>
+    <label for="feedback">Your feedback:</label><br>
     <textarea id="feedback" name="feedback" rows="10" cols="50"></textarea><br>
     <input type="checkbox" id="isPublic" name="isPublic">
     <label for="isPublic">Public</label><br>
     <input type="hidden" name="userLogin" th:value="${userLogin}"/>
     <button type="submit">Submit Feedback</button>
 </form>
-
 </body>
 </html>

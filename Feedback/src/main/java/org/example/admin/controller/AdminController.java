@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AdminController {
@@ -66,6 +67,18 @@ public class AdminController {
     @GetMapping("/refreshFeedbacks")
     public String refreshFeedbacks(Model model) {
         model.addAttribute("feedbacks", feedbackService.getAllFeedbacks());
+        return "redirect:/adminFeedbackDashboard";
+    }
+
+    @PostMapping("/admin/deleteFeedback")
+    public String deleteFeedback(@RequestParam("id") Long id) {
+        feedbackService.deleteFeedback(id);
+        return "redirect:/adminFeedbackDashboard";
+    }
+
+    @PostMapping("/admin/moveToIndex")
+    public String moveToIndex(@RequestParam("id") Long id) {
+        feedbackService.updateFeedbackVisibility(id, true);
         return "redirect:/adminFeedbackDashboard";
     }
 }

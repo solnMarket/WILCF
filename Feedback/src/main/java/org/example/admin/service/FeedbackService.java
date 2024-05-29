@@ -2,7 +2,6 @@ package org.example.admin.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.example.admin.model.FeedbackModel;
 import org.example.admin.repository.FeedbackRepository;
@@ -38,28 +37,6 @@ public class FeedbackService {
 
     public void deleteFeedback(Long id) {
         feedbackRepository.deleteById(id);
-    }
-
-    public String censorFeedbackContent(String feedbackContent) {
-        if (feedbackContent == null || feedbackContent.length() <= 4) {
-            String firstTwo = feedbackContent.substring(0, 2);
-            String lastTwo = feedbackContent.substring(feedbackContent.length() - 2);
-            return firstTwo + "***" + lastTwo; // Not enough characters to censor
-
-        }
-        String firstTwo = feedbackContent.substring(0, 2);
-        String lastTwo = feedbackContent.substring(feedbackContent.length() - 2);
-        return firstTwo + "*****" + lastTwo;
-    }
-
-     public List<FeedbackModel> censorPrivateFeedbacks(List<FeedbackModel> feedbacks) {
-        return feedbacks.stream()
-                .peek(feedback -> {
-                    if (!feedback.isPublic()) {
-                        feedback.setFeedbackContent(censorFeedbackContent(feedback.getFeedbackContent()));
-                    }
-                })
-                .collect(Collectors.toList());
     }
 
     public void updateFeedbackVisibility(Long id, boolean isPublic) {

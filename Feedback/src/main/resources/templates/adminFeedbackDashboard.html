@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <title>Admin Feedback Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
+    
 </head>
 
 <body>
+    <div>
+        <a th:href="@{/adminLogout}">Logout</a>
+    </div>
     <h1>Admin Feedback Dashboard</h1>
     <table>
         <thead>
@@ -25,14 +29,14 @@
                 <td th:text="${feedback.isPublic ? 'Public' : 'Private'}"></td>
                 <td>
                     <!-- Form for deleting feedback -->
-                    <form th:action="@{/deleteFeedback}" method="post">
+                    <form th:action="@{/admin/deleteFeedback}" method="post">
                         <input type="hidden" name="id" th:value="${feedback.id}" />
                         <button type="submit">Delete</button>
                     </form>
                     <!-- Form for moving feedback to general dashboard -->
-                    <form th:action="@{/moveToGeneral}" method="post">
+                    <form th:action="@{/admin/moveToIndex}" method="post">
                         <input type="hidden" name="id" th:value="${feedback.id}" />
-                        <button type="submit">Move to General</button>
+                        <button type="submit">Select Feedback</button>
                     </form>
                 </td>
             </tr>

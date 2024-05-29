@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Wildcat Innovation Labs</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Add your stylesheet here -->
     <script type="text/javascript" src="/js/script.js"></script>
 </head>
+
 <body>
     <nav class="nav">
         <ul class="navbar-links">
@@ -35,13 +37,22 @@
         <div id="feedback">Feedback</div>
     </div>
     <main>
-        <h1>Welcome to the application</h1>
-        <p>for users</p>
-        <a href="/userRegisterPage">Navigate to user registration</a>
-        <a href="/userLoginPage">Navigate to user login</a>
+        <h1>Feedbacks about our Wildcat Innovation Lab</h1>
+
+        <ul>
+            <li th:each="selectedFeedback : ${selectedFeedbacks}">
+                <span th:text="${selectedFeedback.feedbackContent}"></span>
+                <span> by </span>
+                <span th:text="${selectedFeedback.userLogin}"></span>
+            </li>
+        </ul>
+
+        <p>Care to send a feedback about our Innovation Lab?</p>
+        <a href="/userLoginPage">Click here to Login first</a>
     </main>
     <footer>
         <div class="image-container" id="contact"><img src="/contact.jpg" alt="Contact"></div>
     </footer>
 </body>
+
 </html>

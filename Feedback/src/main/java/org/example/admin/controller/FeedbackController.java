@@ -24,7 +24,7 @@ public class FeedbackController {
                                  Model model) {
         boolean publicFeedback = "true".equals(isPublic);
         feedbackService.submitFeedback(feedbackContent, publicFeedback, userLogin);
-        model.addAttribute("userName", userLogin); // Ensure this line is present
+        model.addAttribute("userName", userLogin);
         model.addAttribute("feedbacks", feedbackService.getFeedbacksByUser(userLogin));
         return "userFeedbackDashboard";
     }
@@ -35,11 +35,10 @@ public class FeedbackController {
         return "feedbackDashboard";
     }
 
-
     @GetMapping("/userPersonalPage")
     public String userPersonalPage(Model model, @RequestParam("userLogin") String userLogin) {
         model.addAttribute("userName", userLogin);
-        model.addAttribute("feedbacks", feedbackService.censorPrivateFeedbacks(feedbackService.getFeedbacksByUser(userLogin)));
+        model.addAttribute("feedbacks", feedbackService.getFeedbacksByUser(userLogin));
         return "userPersonalPage";
     }
 
@@ -82,7 +81,7 @@ public class FeedbackController {
         }
         return "redirect:/userPersonalPage?userLogin=" + userLogin;
     }
-    
+
     @GetMapping("/generalFeedbackDashboard")
     public String generalFeedbackDashboard(Model model) {
         model.addAttribute("feedbacks", feedbackService.getAllFeedbacks());
