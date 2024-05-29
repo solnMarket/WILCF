@@ -10,7 +10,11 @@
             var password = document.getElementById("password").value;
             var confirmPassword = document.getElementById("confirmPassword").value;
             if (password !== confirmPassword) {
-                alert("Passwords do not match!");
+                // Custom error window
+                var errorWindow = document.createElement('div');
+                errorWindow.style.color = 'red';
+                errorWindow.textContent = 'Passwords do not match!';
+                document.body.insertBefore(errorWindow, document.body.firstChild);
                 return false;
             }
             return true;
