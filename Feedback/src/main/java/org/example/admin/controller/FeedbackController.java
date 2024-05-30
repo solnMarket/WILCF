@@ -1,7 +1,12 @@
 package org.example.admin.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.example.admin.model.FeedbackModel;
 import org.example.admin.service.FeedbackService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +17,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class FeedbackController {
 
     private final FeedbackService feedbackService;
+    private static final Logger logger = LoggerFactory.getLogger(FeedbackController.class);
+
 
     public FeedbackController(FeedbackService feedbackService) {
         this.feedbackService = feedbackService;
+    }
+
+    @GetMapping("/index")
+    public String showFeedbacks(Model model) {
+        List<FeedbackModel> feedbacks = new ArrayList<>();
+        model.addAttribute("feedbacks", feedbacks);
+        return "index";
     }
 
     @PostMapping("/submitFeedback")
@@ -87,4 +101,5 @@ public class FeedbackController {
         model.addAttribute("feedbacks", feedbackService.getAllFeedbacks());
         return "generalFeedbackDashboard";
     }
+
 }

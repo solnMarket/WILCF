@@ -31,7 +31,7 @@
                     <!-- Feedbacks -->
                     <span th:if="${!feedback.editMode}" th:text="${feedback.feedbackContent}"></span>
                     <form th:if="${feedback.editMode}" th:action="@{/updateFeedback}" method="post">
-                        <textarea name="editedFeedback" th:text="${feedback.feedbackContent}" required></textarea>
+                        <textarea name="editedFeedback" th:text="${feedback.feedbackContent}" row ='10' column='50'required></textarea>
                         <input type="hidden" name="id" th:value="${feedback.id}" />
                         <input type="hidden" name="userLogin" th:value="${userName}" />
                         <input type="submit" value="Update" />

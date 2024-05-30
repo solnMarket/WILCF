@@ -17,7 +17,7 @@
             <li><a href="#thrusts">Thrusts</a></li>
             <li><a href="#facilities">Facilities</a></li>
             <li><a href="#team">Team</a></li>
-            <li><a href="#feedback">Feedback</a></li>
+            <li><a href="#feedbacks">Feedback</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="auth">
@@ -34,20 +34,18 @@
         <div id="thrusts"><img src="/thrusts.jpg" alt="Thrusts"></div>
         <div id="facilities"><img src="/facilities.jpg" alt="Facilities"></div>
         <div id="team"><img src="/team.jpg" alt="Team"></div>
-        <div id="feedback">Feedback</div>
+        <div id="feedbacks">Feedback</div>
     </div>
     <main>
-        <h1>Feedbacks about our Wildcat Innovation Lab</h1>
-
+        <h1>Want to share a Feedback about our Wildcat Innovation Lab?</h1>
+        <p>Some feedbacks to our lab</p>
         <ul>
-            <li th:each="selectedFeedback : ${selectedFeedbacks}">
-                <span th:text="${selectedFeedback.feedbackContent}"></span>
+            <li th:each="feedback : ${feedbacks}">
+                <span th:text="${feedback.feedbackContent}"></span>
                 <span> by </span>
-                <span th:text="${selectedFeedback.userLogin}"></span>
+                <span th:text="${feedback.userLogin}"></span>
             </li>
         </ul>
-
-        <p>Care to send a feedback about our Innovation Lab?</p>
         <a href="/userLoginPage">Click here to Login first</a>
     </main>
     <footer>

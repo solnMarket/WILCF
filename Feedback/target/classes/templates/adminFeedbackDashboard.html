@@ -33,11 +33,6 @@
                         <input type="hidden" name="id" th:value="${feedback.id}" />
                         <button type="submit">Delete</button>
                     </form>
-                    <!-- Form for moving feedback to general dashboard -->
-                    <form th:action="@{/admin/moveToIndex}" method="post">
-                        <input type="hidden" name="id" th:value="${feedback.id}" />
-                        <button type="submit">Select Feedback</button>
-                    </form>
                 </td>
             </tr>
         </tbody>

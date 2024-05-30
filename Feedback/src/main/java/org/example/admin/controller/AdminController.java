@@ -75,10 +75,4 @@ public class AdminController {
         feedbackService.deleteFeedback(id);
         return "redirect:/adminFeedbackDashboard";
     }
-
-    @PostMapping("/admin/moveToIndex")
-    public String moveToIndex(@RequestParam("id") Long id) {
-        feedbackService.updateFeedbackVisibility(id, true);
-        return "redirect:/adminFeedbackDashboard";
-    }
 }
