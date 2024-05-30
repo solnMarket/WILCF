@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class FeedbackController {
 
     private final FeedbackService feedbackService;
-    private static final Logger logger = LoggerFactory.getLogger(FeedbackController.class);
+    private static Logger logger = LoggerFactory.getLogger(FeedbackController.class);
 
 
     public FeedbackController(FeedbackService feedbackService) {
