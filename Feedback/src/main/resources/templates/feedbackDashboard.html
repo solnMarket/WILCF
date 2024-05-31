@@ -6,14 +6,18 @@
 </head>
 
 <body>
-    <h1>Public Feedbacks about our W</h1>
-    <ul>
-        <li th:each="feedback : ${feedbacks}">
-            <span th:text="${feedback.feedbackContent}"></span>
-            <span> by </span>
-            <span th:text="${feedback.userLogin}"></span>
-        </li>
-    </ul>
+    <main>
+        <h1>Want to share a Feedback about our Wildcat Innovation Lab?</h1>
+        <ul>
+            <li th:each="feedback : ${feedbacks}">
+                <span th:text="${feedback.feedbackContent}"></span>
+                <span> by </span>
+                <span th:text="${feedback.userLogin}"></span>
+            </li>
+        </ul>
+        <a href="/userLoginPage">Click here to Login first</a>
+        <a href="/feedbackDashboard">Show Feedbacks</a>
+    </main>
 </body>
 
 </html>

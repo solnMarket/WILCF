@@ -1,14 +1,14 @@
 window.addEventListener("DOMContentLoaded", () => {
     const blockContainer = document.getElementById("blocks");
-    const blockSize =  50;
+    const blockSize = 50;
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
     const numCols = Math.ceil(screenWidth / blockSize);
     const numRows = Math.ceil(screenHeight / blockSize);
     const numBlocks = numCols * numRows;
 
-    function createBlocks () {
-        for (let i = 0; i < numBlocks; i++){
+    function createBlocks() {
+        for (let i = 0; i < numBlocks; i++) {
             const block = document.createElement("div");
             block.classList.add("block");
             block.dataset.index = i;
@@ -17,7 +17,7 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function highlightRandomNeighbors(){
+    function highlightRandomNeighbors() {
         const index = parseInt(this.dataset.index);
         const neighbors = [
             index - 1,
@@ -32,7 +32,7 @@ window.addEventListener("DOMContentLoaded", () => {
             (i) =>
                 i >= 0 &&
                 i < numBlocks &&
-                Math.abs((i % numCols) - (index  % numCols)) <= 1
+                Math.abs((i % numCols) - (index % numCols)) <= 1
         );
 
         this.classList.add("highlight");
@@ -53,8 +53,8 @@ window.addEventListener("DOMContentLoaded", () => {
             });
     }
     function shuffleArray(array) {
-        for (let i = array.length - 1; i>0; i--) {
-            const j = Math.floor(Math.random()  * (i+1));
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
         }
         return array;
@@ -64,21 +64,21 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 
-window.addEventListener('scroll', function() {
+window.addEventListener('scroll', function () {
     var nav = document.querySelector('.nav'); // Select the navigation bar
     if (window.scrollY > 150) { // Adjust the threshold as needed
-      nav.classList.add('scrolled'); // Add the class "scrolled"
+        nav.classList.add('scrolled'); // Add the class "scrolled"
     } else {
-      nav.classList.remove('scrolled'); // Remove the class "scrolled"
+        nav.classList.remove('scrolled'); // Remove the class "scrolled"
     }
 
-  });
+});
 
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var links = document.querySelectorAll('nav ul.navbar-links a[href^="#"]');
 
-    links.forEach(function(link) {
-        link.addEventListener('click', function(e) {
+    links.forEach(function (link) {
+        link.addEventListener('click', function (e) {
             e.preventDefault();
 
             var targetId = this.getAttribute('href').substring(1);
@@ -108,4 +108,3 @@ function validatePasswords() {
     }
     return true;
 }
-  

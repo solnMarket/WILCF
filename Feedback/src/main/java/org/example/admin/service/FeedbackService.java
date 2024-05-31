@@ -31,6 +31,10 @@ public class FeedbackService {
         return feedbackRepository.findByIsPublicTrue();
     }
 
+    public List<FeedbackModel> getPublicFeedbacksTrue() {
+        return feedbackRepository.findByIsPublic(true);
+    }
+
     public List<FeedbackModel> getAllFeedbacks() {
         return feedbackRepository.findAll();
     }

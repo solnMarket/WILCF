@@ -35,10 +35,11 @@
         <div id="facilities"><img src="/facilities.jpg" alt="Facilities"></div>
         <div id="team"><img src="/team.jpg" alt="Team"></div>
         <div id="feedbacks">Feedback</div>
+
+
     </div>
     <main>
         <h1>Want to share a Feedback about our Wildcat Innovation Lab?</h1>
-        <p>Some feedbacks to our lab</p>
         <ul>
             <li th:each="feedback : ${feedbacks}">
                 <span th:text="${feedback.feedbackContent}"></span>
@@ -47,6 +48,7 @@
             </li>
         </ul>
         <a href="/userLoginPage">Click here to Login first</a>
+        <a href="/feedbackDashboard">Show Feedbacks</a>
     </main>
     <footer>
         <div class="image-container" id="contact"><img src="/contact.jpg" alt="Contact"></div>
