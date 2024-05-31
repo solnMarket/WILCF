@@ -4,11 +4,13 @@ import org.example.admin.model.FeedbackModel;
 import org.example.admin.service.FeedbackService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
  
 @Controller
 public class FeedbackController {
@@ -20,17 +22,24 @@ public class FeedbackController {
         this.feedbackService = feedbackService;
     }
 
-    @GetMapping("/index")
-    public String showFeedbacks(Model model) {
+    // @GetMapping("/index")
+    // public String showFeedbacks(Model model) {
+    //     List<FeedbackModel> feedbacks = feedbackService.getAllFeedbacks(); // Corrected line
+    //     model.addAttribute("feedbacks", feedbacks);
+    //     return "index";
+    // }
+
+    @GetMapping("/")
+    public String home(Model model) {
         model.addAttribute("feedbacks", feedbackService.getPublicFeedbacks());
-        return "index";
+        return "index"; // Return Thymeleaf template as landing page (index.html)
     }
 
-    @GetMapping("/wildcatInnovLab")
-    public String wildcatInnovLab(Model model) {
-        model.addAttribute("feedbacks", feedbackService.getPublicFeedbacks());
-        return "wildcatInnovLab";
-    }
+    // @GetMapping("/wildcatInnovLab")
+    // public String wildcatInnovLab(Model model) {
+    //     model.addAttribute("feedbacks", feedbackService.getPublicFeedbacks());
+    //     return "wildcatInnovLab";
+    // }
  
     @PostMapping("/submitFeedback")
     public String submitFeedback(@RequestParam("feedback") String feedbackContent,
