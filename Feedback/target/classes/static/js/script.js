@@ -108,3 +108,10 @@ function validatePasswords() {
     }
     return true;
 }
+
+function toggleFeedbackSelection(id) {
+    const checkbox = document.getElementById('checkbox-' + id);
+    const isSelected = checkbox.checked;
+    const input = document.getElementById('isSelected-' + id);
+    input.value = isSelected;
+}

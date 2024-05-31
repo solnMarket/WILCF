@@ -30,6 +30,9 @@ public class FeedbackModel {
     @Column(nullable = false)
     private boolean isSelected;
 
+    @Column(nullable = false)
+    private String suggestion;
+
     // Constructors
     public FeedbackModel() {
     }
@@ -73,6 +76,14 @@ public class FeedbackModel {
 
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
+    }
+    
+    public String getSuggestion() {
+        return suggestion;
+    }
+
+    public void setSuggestion(String suggestion) {
+        this.suggestion = suggestion;
     }
 
     public boolean isSelected() {

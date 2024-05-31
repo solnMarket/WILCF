@@ -10,17 +10,23 @@
         <a th:href="@{/logout}">Logout</a>
     </div>
     <h1 th:text="'We are glad to hear your Feedback, ' + ${userName} + '!'"></h1>
-    <form th:action="@{/submitFeedback}" method="post"> 
+    <form th:action="@{/submitFeedback}" method="post">
         <textarea name="feedback" rows="10" cols="50" required></textarea>
         <input type="hidden" id="isPublic" name="isPublic" value="true" />
         <input type="hidden" name="userLogin" th:value="${userName}" />
+
+        <h2>Suggestions (Optional)</h2>
+        <textarea name="suggestion" rows="10" cols="50"></textarea>
+
         <input type="submit" value="Submit" />
     </form>
+
     <h1>Your Feedbacks</h1>
     <table>
         <thead>
             <tr>
                 <th>Feedback</th>
+                <th>Suggestion</th>
                 <th>Visibility</th>
                 <th>Actions</th>
             </tr>
@@ -31,11 +37,16 @@
                     <!-- Feedbacks -->
                     <span th:if="${!feedback.editMode}" th:text="${feedback.feedbackContent}"></span>
                     <form th:if="${feedback.editMode}" th:action="@{/updateFeedback}" method="post">
-                        <textarea name="editedFeedback" th:text="${feedback.feedbackContent}" row ='10' column='50'required></textarea>
+                        <textarea name="editedFeedback" th:text="${feedback.feedbackContent}" rows="10" cols="50" required></textarea>
+                        <textarea name="editedSuggestion" th:text="${feedback.suggestion}" rows="10" cols="50"></textarea>
                         <input type="hidden" name="id" th:value="${feedback.id}" />
                         <input type="hidden" name="userLogin" th:value="${userName}" />
                         <input type="submit" value="Update" />
                     </form>
+                </td>
+                <td>
+                    <!-- Suggestions -->
+                    <span th:if="${!feedback.editMode}" th:text="${feedback.suggestion}"></span>
                 </td>
                 <td th:text="${feedback.isPublic ? 'Public' : 'Private'}"></td>
                 <td>

@@ -22,8 +22,12 @@ public class FeedbackService {
         return feedbackRepository.findByUserLogin(userLogin);
     }
 
-    public void submitFeedback(String feedbackContent, boolean isPublic, String userLogin) {
-        FeedbackModel feedback = new FeedbackModel(null, feedbackContent, isPublic, userLogin);
+    public void submitFeedback(String feedbackContent, boolean isPublic, String userLogin, String suggestion) {
+        FeedbackModel feedback = new FeedbackModel();
+        feedback.setFeedbackContent(feedbackContent);
+        feedback.setPublic(isPublic);
+        feedback.setUserLogin(userLogin);
+        feedback.setSuggestion(suggestion);
         feedbackRepository.save(feedback);
     }
 
@@ -74,8 +78,10 @@ public class FeedbackService {
         }
         feedbackRepository.saveAll(allFeedbacks);
     }
-    
+
     public List<FeedbackModel> getSelectedFeedbacks() {
         return feedbackRepository.findByIsSelected(true);
     }
+
+    
 }

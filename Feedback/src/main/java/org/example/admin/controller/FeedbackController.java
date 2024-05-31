@@ -45,10 +45,10 @@ public class FeedbackController {
     }
 
     @PostMapping("/admin/toggleFeedbackSelection")
-    public String toggleFeedbackSelection(@RequestParam("id") Long id, @RequestParam("isSelected") boolean isSelected) {
-        feedbackService.updateSelectedFeedback(id, isSelected);
-        return "redirect:/adminFeedbackDashboard";
-    }
+public String toggleFeedbackSelection(@RequestParam("id") Long id, @RequestParam("isSelected") boolean isSelected) {
+    feedbackService.updateSelectedFeedback(id, isSelected);
+    return "redirect:/adminFeedbackDashboard";
+}
 
 
     // @GetMapping("/wildcatInnovLab")
@@ -61,12 +61,13 @@ public class FeedbackController {
     public String submitFeedback(@RequestParam("feedback") String feedbackContent,
                                  @RequestParam(name = "isPublic", required = false) String isPublic,
                                  @RequestParam("userLogin") String userLogin,
+                                 @RequestParam(name = "suggestion", required = false) String suggestion,
                                  Model model) {
         boolean publicFeedback = "true".equals(isPublic);
-        feedbackService.submitFeedback(feedbackContent, publicFeedback, userLogin);
+        feedbackService.submitFeedback(feedbackContent, publicFeedback, userLogin, suggestion);
         model.addAttribute("userName", userLogin);
         model.addAttribute("feedbacks", feedbackService.getFeedbacksByUser(userLogin));
-        return "userFeedbackDashboard";
+        return "userPersonalPage";
     }
  
     @GetMapping("/feedbackDashboard")
@@ -112,15 +113,20 @@ public class FeedbackController {
     }
  
     @PostMapping("/updateFeedback")
-    public String updateFeedback(@RequestParam("id") Long id, @RequestParam("editedFeedback") String editedFeedback, @RequestParam("userLogin") String userLogin) {
-        FeedbackModel feedback = feedbackService.getFeedbackById(id);
-        if (feedback != null) {
-            feedback.setFeedbackContent(editedFeedback);
-            feedback.setEditMode(false);
-            feedbackService.save(feedback);
-        }
-        return "redirect:/userPersonalPage?userLogin=" + userLogin;
+public String updateFeedback(@RequestParam("id") Long id,
+                             @RequestParam("editedFeedback") String editedFeedback,
+                             @RequestParam("editedSuggestion") String editedSuggestion,
+                             @RequestParam("userLogin") String userLogin) {
+    FeedbackModel feedback = feedbackService.getFeedbackById(id);
+    if (feedback != null) {
+        feedback.setFeedbackContent(editedFeedback);
+        feedback.setSuggestion(editedSuggestion);
+        feedback.setEditMode(false);
+        feedbackService.save(feedback);
     }
+    return "redirect:/userPersonalPage?userLogin=" + userLogin;
+}
+
  
     @GetMapping("/generalFeedbackDashboard")
     public String generalFeedbackDashboard(Model model) {
