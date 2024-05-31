@@ -27,6 +27,9 @@ public class FeedbackModel {
     @Column(nullable = false)
     private String userLogin;
 
+    @Column(nullable = false)
+    private boolean isSelected;
+
     // Constructors
     public FeedbackModel() {
     }
@@ -70,6 +73,14 @@ public class FeedbackModel {
 
     public void setUserLogin(String userLogin) {
         this.userLogin = userLogin;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean isSelected) {
+        this.isSelected = isSelected;
     }
 
     @Override

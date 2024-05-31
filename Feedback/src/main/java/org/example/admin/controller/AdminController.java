@@ -1,5 +1,7 @@
 package org.example.admin.controller;
 
+import java.util.List;
+
 import org.example.admin.model.AdminModel;
 import org.example.admin.service.AdminService;
 import org.example.admin.service.FeedbackService;
@@ -75,4 +77,11 @@ public class AdminController {
         feedbackService.deleteFeedback(id);
         return "redirect:/adminFeedbackDashboard";
     }
+
+    @PostMapping("/admin/updateSelectedFeedbacks")
+    public String updateSelectedFeedbacks(@RequestParam("selectedFeedbackIds") List<Long> selectedFeedbackIds) {
+        feedbackService.updateSelectedFeedbacks(selectedFeedbackIds);
+        return "redirect:/adminFeedbackDashboard";
+    }
+
 }

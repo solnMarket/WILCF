@@ -11,4 +11,5 @@ public interface FeedbackRepository extends JpaRepository<FeedbackModel, Long> {
     List<FeedbackModel> findByIsPublicTrue();
     List<FeedbackModel> findByUserLogin(String userLogin);
     List<FeedbackModel> findByIsPublic(boolean isPublic);
+    List<FeedbackModel> findByIsSelected(boolean isSelected);
 }

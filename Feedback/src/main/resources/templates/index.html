@@ -33,12 +33,12 @@
         <div id="feedbacks">Feedback</div>
     </div>
     <main>
-        <h1>Want to share a Feedback about our Wildcat Innovation Lab?</h1>
+        <h1>Want to share a Feedback about our Wildcat Innovation Lab?</h1> 
         <ul>
-            <li th:each="feedback : ${feedbacks}">
-                <span th:text="${feedback.feedbackContent}"></span>
+            <li th:each="selectedFeedback : ${selectedFeedbacks}">
+                <span th:text="${selectedFeedback.feedbackContent}"></span>
                 <span> by </span>
-                <span th:text="${feedback.userLogin}"></span>
+                <span th:text="${selectedFeedback.userLogin}"></span>
             </li>
         </ul>
         <a href="/userLoginPage">Click here to Login first</a>

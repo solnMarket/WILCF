@@ -59,4 +59,23 @@ public class FeedbackService {
     public void save(FeedbackModel feedback) {
         feedbackRepository.save(feedback);
     }
+
+    public void updateSelectedFeedback(Long id, boolean isSelected) {
+        FeedbackModel feedback = feedbackRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid feedback ID: " + id));
+        feedback.setSelected(isSelected);
+        feedbackRepository.save(feedback);
+    }
+    
+    public void updateSelectedFeedbacks(List<Long> selectedFeedbackIds) {
+        List<FeedbackModel> allFeedbacks = feedbackRepository.findAll();
+        for (FeedbackModel feedback : allFeedbacks) {
+            feedback.setSelected(selectedFeedbackIds.contains(feedback.getId()));
+        }
+        feedbackRepository.saveAll(allFeedbacks);
+    }
+    
+    public List<FeedbackModel> getSelectedFeedbacks() {
+        return feedbackRepository.findByIsSelected(true);
+    }
 }

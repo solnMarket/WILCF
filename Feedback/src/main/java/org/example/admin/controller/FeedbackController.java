@@ -1,10 +1,11 @@
 package org.example.admin.controller;
  
+import java.util.List;
+
 import org.example.admin.model.FeedbackModel;
 import org.example.admin.service.FeedbackService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,10 +31,25 @@ public class FeedbackController {
     // }
 
     @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("feedbacks", feedbackService.getPublicFeedbacks());
-        return "index"; // Return Thymeleaf template as landing page (index.html)
+    public String index(Model model) {
+        model.addAttribute("selectedFeedbacks", feedbackService.getSelectedFeedbacks());
+        return "index";
     }
+
+    @PostMapping("/admin/moveToIndex")
+    public String moveToIndex(@RequestParam("selectedFeedbackIds") List<Long> selectedFeedbackIds) {
+        for (Long id : selectedFeedbackIds) {
+            feedbackService.updateSelectedFeedback(id, true);
+        }
+        return "redirect:/adminFeedbackDashboard";
+    }
+
+    @PostMapping("/admin/toggleFeedbackSelection")
+    public String toggleFeedbackSelection(@RequestParam("id") Long id, @RequestParam("isSelected") boolean isSelected) {
+        feedbackService.updateSelectedFeedback(id, isSelected);
+        return "redirect:/adminFeedbackDashboard";
+    }
+
 
     // @GetMapping("/wildcatInnovLab")
     // public String wildcatInnovLab(Model model) {

@@ -1,45 +1,59 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <title>Admin Feedback Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
-    
+    <script>
+        function toggleFeedbackSelection(id) {
+            const checkbox = document.getElementById('checkbox-' + id);
+            const isSelected = checkbox.checked;
+            const input = document.getElementById('isSelected-' + id);
+            input.value = isSelected;
+        }
+    </script>
 </head>
-
 <body>
     <div>
         <a th:href="@{/adminLogout}">Logout</a>
     </div>
     <h1>Admin Feedback Dashboard</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>User</th>
-                <th>Feedback</th>
-                <th>Visibility</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="feedback : ${feedbacks}">
-                <td th:text="${feedback.isPublic ? feedback.userLogin : feedback.getCensoredName()}"></td>
-                <td th:text="${feedback.feedbackContent}"></td>
-                <td th:text="${feedback.isPublic ? 'Public' : 'Private'}"></td>
-                <td>
-                    <!-- Form for deleting feedback -->
-                    <form th:action="@{/admin/deleteFeedback}" method="post">
-                        <input type="hidden" name="id" th:value="${feedback.id}" />
-                        <button type="submit">Delete</button>
-                    </form>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <form th:action="@{/admin/updateSelectedFeedbacks}" method="post">
+        <table>
+            <thead>
+                <tr>
+                    <th>Display Publicly</th>
+                    <th>User</th>
+                    <th>Feedback</th>
+                    <th>Visibility</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="feedback : ${feedbacks}">
+                    <td>
+                        <input type="checkbox" name="selectedFeedbackIds" th:value="${feedback.id}"
+                               th:id="'checkbox-' + ${feedback.id}" th:checked="${feedback.isSelected}"
+                               th:onclick="toggleFeedbackSelection(${feedback.id})">
+                        <input type="hidden" name="isSelected" th:value="${feedback.isSelected}" th:id="'isSelected-' + ${feedback.id}">
+                    </td>
+                    <td th:text="${feedback.isPublic ? feedback.userLogin : feedback.getCensoredName()}"></td>
+                    <td th:text="${feedback.feedbackContent}"></td>
+                    <td th:text="${feedback.isPublic ? 'Public' : 'Private'}"></td>
+                    <td>
+                        <!-- Form for deleting feedback -->
+                        <form th:action="@{/admin/deleteFeedback}" method="post">
+                            <input type="hidden" name="id" th:value="${feedback.id}" />
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="submit">Update Display</button>
+    </form>
     <form method="get" action="/adminFeedbackDashboard">
         <button type="submit">Refresh Dashboard</button>
     </form>
 </body>
-
 </html>
