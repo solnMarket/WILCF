@@ -25,6 +25,12 @@ public class FeedbackController {
         model.addAttribute("feedbacks", feedbackService.getPublicFeedbacks());
         return "index";
     }
+
+    @GetMapping("/wildcatInnovLab")
+    public String wildcatInnovLab(Model model) {
+        model.addAttribute("feedbacks", feedbackService.getPublicFeedbacks());
+        return "wildcatInnovLab";
+    }
  
     @PostMapping("/submitFeedback")
     public String submitFeedback(@RequestParam("feedback") String feedbackContent,
