@@ -38,11 +38,10 @@
             <li th:each="selectedFeedback : ${selectedFeedbacks}">
                 <span th:text="${selectedFeedback.feedbackContent}"></span>
                 <span> by </span>
-                <span th:text="${selectedFeedback.userLogin}"></span>
+                <span th:text="${selectedFeedback.isPublic ? selectedFeedback.userLogin : selectedFeedback.censoredName}"></span>
             </li>
         </ul>
         <a href="/userLoginPage">Click here to Login first</a>
-        <a href="/feedbackDashboard">Show Feedbacks</a>
     </main>
 
     <footer>
