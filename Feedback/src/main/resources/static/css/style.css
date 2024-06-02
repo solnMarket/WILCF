@@ -339,7 +339,8 @@ ul.navbar-links a:hover {
     padding-right: 50px;
     border: 1px solid #888;
     border-radius: 10px; /* Rounded corners */
-    max-width: 400px; /* Adjust the width as needed */
+    width: 30%;
+     /* Adjust the width as needed */
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
 }
@@ -437,6 +438,30 @@ input[type="checkbox"] {
 
 .input-box input[type="submit"]:hover {
     background: #FDCC01;
+}
+
+/*TOP PART OF FEEDBACK, h1 and buttons*/
+
+.topFeedback {
+    display: flex; /* Use flexbox */
+    align-items: center; /* Align items vertically */
+}
+
+.MyFeedbacksBtn {
+    color: #FDCC01;
+    border: 2px solid #FDCC01;
+    background-color: transparent;
+    border-radius: 10px; /* Adjust the border-radius */
+    padding: 10px 20px; /* Adjust the padding */
+    width: 200px;
+    display: inline-block; /* Change display to inline-block */
+    text-align: center; /* Center the text horizontally */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+}
+
+.MyFeedbacksBtn:hover {
+    background-color: #FDCC01;
+    color: black;
 }
 
 
