@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Feedback Dashboard</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script type="text/javascript" src="/js/script.js"></script>
+    <link rel="stylesheet" href="css/admin.css">
+    <script type="text/javascript" src="js/admin.js"></script>
 </head>
 <body>
     <div>
         <a th:href="@{/adminLogout}">Logout</a>
     </div>
-    <h1>Admin Feedback Dashboard</h1>
+    <h1>| Welcome Admin</h1>
     <form th:action="@{/admin/updateSelectedFeedbacks}" method="post">
         <table>
             <thead>
@@ -24,11 +24,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="feedback : ${feedbacks}">
+                <tr th:each="feedback : ${feedbacks}" onclick="showRowModal(event, this)">
                     <td>
                         <input type="checkbox" name="selectedFeedbackIds" th:value="${feedback.id}"
                                th:id="'checkbox-' + ${feedback.id}" th:checked="${feedback.isSelected}"
-                               th:onclick="toggleFeedbackSelection(${feedback.id})">
+                               th:onclick="toggleFeedbackSelection(${feedback.id}, event)">
                         <input type="hidden" name="isSelected" th:value="${feedback.isSelected}" th:id="'isSelected-' + ${feedback.id}">
                     </td>
                     <td th:text="${feedback.isPublic ? feedback.userLogin : feedback.getCensoredName()}"></td>
@@ -37,18 +37,61 @@
                     <td th:text="${feedback.isPublic ? 'Public' : 'Private'}"></td>
                     <td>
                         <!-- Form for deleting feedback -->
-                        <form th:action="@{/admin/deleteFeedback}" method="post">
+                        <form th:action="@{/admin/deleteFeedback}" method="post" th:onsubmit="event.stopPropagation()">
                             <input type="hidden" name="id" th:value="${feedback.id}" />
-                            <button type="submit">Delete</button>
+                            <button type="submit">X</button>
                         </form>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <button type="submit">Update Display</button>
+        <button type="submit">Save Changes</button>
     </form>
     <form method="get" action="/adminFeedbackDashboard">
         <button type="submit">Refresh Dashboard</button>
     </form>
+
+    <!-- Modal Structure -->
+    <div id="rowModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p id="modalRowText"></p>
+        </div>
+    </div>
+
+    <script>
+        function showRowModal(event, row) {
+            if (event.target.tagName.toLowerCase() === 'input' || event.target.tagName.toLowerCase() === 'button' || event.target.tagName.toLowerCase() === 'form') {
+                return;
+            }
+            const cells = row.getElementsByTagName('td');
+            let content = '';
+            for (let i = 1; i < cells.length; i++) { // Start loop from index 1 to skip the first column
+                if (cells[i].children.length === 0) {
+                    content += cells[i].innerText + '\n';
+                }
+            }
+            document.getElementById('modalRowText').innerText = content;
+            document.getElementById('rowModal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('rowModal').style.display = "none";
+        }
+
+        // Close the modal when the user clicks anywhere outside of the modal
+        window.onclick = function(event) {
+            const modal = document.getElementById('rowModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Prevent checkbox and button clicks from triggering the row click event
+        function toggleFeedbackSelection(id, event) {
+            event.stopPropagation();
+        }
+    </script>
+    
 </body>
 </html>

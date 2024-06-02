@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
         circle.style.animation = 'none';
         void circle.offsetWidth; // Trigger reflow
         circle.style.animation = 'circleMove 2s forwards';
-        
+
         // Reset the idle timer
         clearTimeout(idleTimer);
         idleTimer = setTimeout(hideCircle, 10000); // Set a timer to hide the circle after 2 seconds of inactivity
@@ -185,5 +185,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+document.addEventListener("DOMContentLoaded", function () {
+    const carouselItems = document.querySelectorAll('.carousel-item');
+    const itemDetailModal = document.getElementById('itemDetailModal');
+    const itemFeedbackContent = document.getElementById('itemFeedbackContent');
+    const itemSuggestion = document.getElementById('itemSuggestion');
+    const itemUsername = document.getElementById('itemUsername');
+    const closeModalButtons = document.querySelectorAll('.closeModal');
+
+    carouselItems.forEach(item => {
+        item.addEventListener('click', function () {
+            const feedbackContent = item.getAttribute('data-content');
+            const suggestion = item.getAttribute('data-suggestion');
+            const username = item.getAttribute('data-username');
+
+            itemFeedbackContent.innerText = feedbackContent;
+            itemSuggestion.innerText = suggestion;
+            itemUsername.innerText = username;
+
+            itemDetailModal.style.display = 'block';
+        });
+    });
+
+    closeModalButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            itemDetailModal.style.display = 'none';
+        });
+    });
+
+    window.addEventListener('click', function (event) {
+        if (event.target === itemDetailModal) {
+            itemDetailModal.style.display = 'none';
+        }
+    });
+});
 
 

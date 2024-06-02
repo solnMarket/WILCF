@@ -44,7 +44,11 @@
                 </h3>
             </marquee>
             <div class="feedbacks">
-                <h1>| TRUSTED BY MANY</h1>
+                <div class="topFeedback">
+                    <h1>| TRUSTED BY MANY</h1>
+                    <!--For testing  User Side-->
+                <button id="openMyFeedbacksBtn" class="MyFeedbacksBtn">My Shared Journeys</button>
+            </div>
                 <div class="carousel-container">
                     <ul class="carousel-list">
                         <li th:each="feedback : ${feedbacks}" class="carousel-item">

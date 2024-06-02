@@ -45,7 +45,6 @@
                 <div class="topFeedback">
                     <h1>| TRUSTED BY MANY</h1>
                     <!--For testing  User Side-->
-                <button id="openMyFeedbacksBtn" class="MyFeedbacksBtn">My Shared Journeys</button>
             </div>
             <div class="carousel-container">
                 <ul class="carousel-list">
@@ -64,14 +63,14 @@
                 <button class="carousel-next">></button>
             </div>
             <p><span id="careText">Care to share your story</span><br> SPOTlight your journey with WILdcat Innovation Labs</p>
-            <!--For testing-->
-            <button id="openSpotlightBtn" class="spotlightBtn">SPOTLIGHT</button>
+            <!--For testing
+            <button id="openSpotlightBtn" class="spotlightBtn">SPOTLIGHT</button>-->
             <!--If login is done
             <button id="openSpotlightBtn" class="spotlightBtn" th:if="${isUserSignedIn}">SPOTLIGHT</button>
             <button id="openSpotlightBtn" class="spotlightBtn" th:if="${isAdminSignedIn}">SPOTLIGHT</button>
             -->
-            <!-- <button id="redirectToLoginBtn" class="spotlightBtn" th:unless="${isUserSignedIn}" th:onclick="|location.href='@{/userLoginPage}'|">Login</button>
-            --><br><br>
+            <button id="redirectToLoginBtn" class="spotlightBtn" th:unless="${isUserSignedIn}" th:onclick="|location.href='@{/userLoginPage}'|">Login</button>
+            <br><br>
             </div>
         </div>
         <div class="circle"></div>
