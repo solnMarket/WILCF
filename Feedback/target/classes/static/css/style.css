@@ -92,3 +92,195 @@ ul.navbar-links a:hover {
     text-decoration: underline;
 }
 
+/* Feedback */
+#feedbacks {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 1%;
+    position: relative;
+    color: black;
+    font-family: arial;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text within the container */
+}
+
+#feedbacks h1 {
+    color: #FDCC01;
+    align-self: flex-start; /* Align the h1 to the left */
+    width: 100%; /* Ensure h1 takes full width */
+    text-align: left; /* Align text inside h1 to the left */
+    padding-left: 0; /* Adjust padding if needed */
+    font-size: 40px;
+    font-family: Bahnschrift Condensed;
+}
+
+#feedbacks p {
+    color: #FDCC01;
+    margin: 20px 0; /* Add margin for spacing */
+    font-size: 25px;
+
+}
+
+.carousel-container .feedbackText{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 30px;
+}
+
+.spotlightBtn {
+    background: linear-gradient(to bottom, white, #FDCC01);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: black;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 10px; /* Add some margin for spacing */
+    text-align: center; /* Center text inside button */
+}
+
+.spotlightBtn:hover {
+    background: #FDCC01; /* Change to bottom */
+}
+
+/* User name and Icon on every feedback list */
+.userFeedProfile {
+    display: flex;
+    align-items: flex-start; /* Align items at the start to keep them aligned to the top */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 5%;
+}
+
+.userFeedProfile .profileIcon {
+    width: 70px; /* Adjust as needed */
+    height: 70px; /* Adjust as needed */
+    border-radius: 50%;
+    margin-right: 10px; /* Add some margin to the right of the icon */
+    object-fit: cover; /* Ensures the image fits within the specified dimensions */
+}
+
+.userFeedProfile .textContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center the text within the container */
+}
+
+.userFeedProfile .textContainer span {
+    display: block;
+    margin: 0;
+}
+
+.carousel-item {
+    position: relative; /* Make sure the parent container is positioned relative */
+    padding-bottom: 60px; /* Add some padding to accommodate the user profile at the bottom */
+}
+
+
+/* Circle animation */
+.circle {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background-color: #ffe681;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes circleMove {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+}
+
+.body_index{
+    background-color: black;
+    z-index: -5;
+}
+
+/*Feedback Carousel Slide*/
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 20px; /* Add margin space between the buttons and the item list */
+}
+
+.carousel-list {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0;
+    margin-left: 5%;
+    margin-right: 20%;
+    list-style: none;
+}
+
+.carousel-item {
+    flex: 0 0 calc(33.33% - 20px); /* adjust the width of each item and subtract the margin */
+    height: 350px;
+    margin: 0 20px; /* Increase margin between items */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-prev,
+.carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    margin-top: -20px; /* Adjust to vertically align buttons with carousel items */
+    background: none; /* Remove background color */
+    border: none; /* Remove border */
+    color: white; /* Use inherited text color */
+    font-size: 1.5em; /* Adjust font size as needed */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    text-decoration: none; /* Ensure no text decoration */
+
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+    background: none; /* Ensure no background color on hover */
+    color: #ccc; /* Optional: Change text color on hover */
+}
+
+.carousel-prev {
+    left: 10px;
+}
+
+.carousel-next {
+    right: 10px;
+}
+
+
+.carousel-list li {
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-list li.active {
+    transform: translateX(0);
+}
+
+.carousel-list li.inactive {
+    transform: translateX(-100%);
+}

@@ -9,7 +9,7 @@
     <script async src="https://d3kno6bpmj270m.cloudfront.net/widget/userdesk.js" data-userdesk="clwtw2kt70002gsk0xb9dilcp"></script>
 
 </head>
-<body>
+<body class="body_index">
     <nav class="nav">
         <ul class="navbar-links">
             <li><a href="/" class="logo-image"><img src="/123123.png" alt="Logo"></a></li>
@@ -30,18 +30,74 @@
         <div id="thrusts"><img src="/thrusts.jpg" alt="Thrusts"></div>
         <div id="facilities"><img src="/facilities.jpg" alt="Facilities"></div>
         <div id="team"><img src="/team.jpg" alt="Team"></div>
-        <div id="feedbacks">Feedback</div>
+        <div id="feedbacks">
+            <h1>| FEEDBACKS</h1>
+            <marquee><h3>SPOTlight your success story </h3></marquee>
+            <div class="carousel-container">
+                <ul class="carousel-list">
+                    <li th:each="selectedFeedback : ${selectedFeedbacks}" class="carousel-item">
+                        "<span class="feedbackText" th:text="${selectedFeedback.feedbackContent}"></span>"
+                        <div class="userFeedProfile">
+                            <img src="/icon.jpg" class="profileIcon" alt="Icon">
+                            <div class="textContainer">
+                                <span> by </span><br>
+                                <span class="userFullName" th:text="${selectedFeedback.isPublic? selectedFeedback.userLogin : selectedFeedback.censoredName}"></span>
+                            </div>    
+                        </div>
+                    </li>
+                </ul>
+                <button class="carousel-prev"><</button>
+                <button class="carousel-next">></button>
+            </div>
+            <p>SPOTlight your journey with WILdcat Innovation Labs</p>
+            <button id="openModalBtn" class="spotlightBtn" th:if="${isUserSignedIn}">Open Modal</button>
+            <button id="redirectToLoginBtn" class="spotlightBtn" th:unless="${isUserSignedIn}" th:onclick="|location.href='@{/userLoginPage}'|">Login</button>
+        </div>
+        <div class="circle"></div>
+
+
+    <script>
+        const carouselList = document.querySelector('.carousel-list');
+        const carouselItems = Array.from(carouselList.children);
+        const carouselPrev = document.querySelector('.carousel-prev');
+        const carouselNext = document.querySelector('.carousel-next');
+
+        let currentIndex = 0;
+
+        carouselPrev.addEventListener('click', () => {
+            // Move to the previous item
+            currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+            updateCarousel();
+        });
+
+        carouselNext.addEventListener('click', () => {
+            // Move to the next item
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            updateCarousel();
+        });
+
+        function updateCarousel() {
+            carouselItems.forEach((item, index) => {
+                if (
+                    index >= currentIndex && 
+                    index < currentIndex + 3
+                ) {
+                    // Show the current item and the next two items
+                    item.style.display = 'block';
+                } else {
+                    // Hide other items
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        updateCarousel();
+
+    </script>
+                
     </div>
     <main>
-        <h1>Want to share a Feedback about our Wildcat Innovation Lab?</h1> 
-        <ul>
-            <li th:each="selectedFeedback : ${selectedFeedbacks}">
-                <span th:text="${selectedFeedback.feedbackContent}"></span>
-                <span> by </span>
-                <span th:text="${selectedFeedback.isPublic ? selectedFeedback.userLogin : selectedFeedback.censoredName}"></span>
-            </li>
-        </ul>
-        <a href="/userLoginPage">Click here to Login first</a>
+        
     </main>
 
     <footer>

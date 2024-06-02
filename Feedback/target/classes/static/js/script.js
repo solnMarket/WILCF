@@ -144,3 +144,43 @@ function toggleFeedbackSelection(id) {
     const input = document.getElementById('isSelected-' + id);
     input.value = isSelected;
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    var feedbackSection = document.getElementById('feedbacks');
+    var circle = document.querySelector('.circle');
+    var idleTimer; // Variable to store the idle timer
+
+    // Function to handle mousemove event
+    function handleMouseMove(e) {
+        circle.style.display = 'block'; // Show the circle
+        circle.style.left = e.pageX + 'px';
+        circle.style.top = e.pageY + 'px';
+
+        // If the circle is currently dissolving, reset the animation
+        circle.style.animation = 'none';
+        void circle.offsetWidth; // Trigger reflow
+        circle.style.animation = 'circleMove 2s forwards';
+        
+        // Reset the idle timer
+        clearTimeout(idleTimer);
+        idleTimer = setTimeout(hideCircle, 10000); // Set a timer to hide the circle after 2 seconds of inactivity
+    }
+
+    // Function to hide the circle
+    function hideCircle() {
+        circle.style.display = 'none';
+    }
+
+    // Add event listener for mousemove
+    feedbackSection.addEventListener('mousemove', handleMouseMove);
+
+    // Add event listeners for mouseenter and mouseleave to show/hide the circle when the user enters/leaves the feedback section
+    feedbackSection.addEventListener('mouseenter', function () {
+        circle.style.display = 'block';
+        clearTimeout(idleTimer); // Clear the idle timer
+    });
+    feedbackSection.addEventListener('mouseleave', hideCircle);
+});
+
+
+
