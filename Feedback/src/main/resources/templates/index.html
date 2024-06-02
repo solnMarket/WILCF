@@ -31,7 +31,6 @@
         <div id="facilities"><img src="/facilities.jpg" alt="Facilities"></div>
         <div id="team"><img src="/team.jpg" alt="Team"></div>
         <div id="feedbacks">
-            <h1>| TRUSTED BY MANY</h1>
             <marquee><h3>&nbsp;&nbsp;SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT<br> 
                 SPOTlight your success story SPOTlight your success story SPOTlight <br> 
                 &nbsp;&nbsp;&nbsp;&nbsp;SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT <br>
@@ -39,9 +38,11 @@
                 &nbsp;&nbsp;SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;SPOTlight your success story SPOTlight your <br> 
                 &nbsp;SPOTlight your success story SPOTlight your success story SPOT<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;SPOT SPOT SPOTlight your success story SPOTlight 
+                &nbsp;&nbsp;&nbsp;&nbsp;SPOT SPOT SPOTlight your success story SPOTlight
+                &nbsp;SPOTlight your success story SPOTlight your success story SPOT 
             </h3></marquee>
-            
+            <div class="feedbacks">
+            <h1>| TRUSTED BY MANY</h1>
             <div class="carousel-container">
                 <ul class="carousel-list">
                     <li th:each="selectedFeedback : ${selectedFeedbacks}" class="carousel-item">
@@ -67,10 +68,9 @@
             -->
             <!-- <button id="redirectToLoginBtn" class="spotlightBtn" th:unless="${isUserSignedIn}" th:onclick="|location.href='@{/userLoginPage}'|">Login</button>
             --><br><br>
+            </div>
         </div>
         <div class="circle"></div>
-
-
     <script>
         const carouselList = document.querySelector('.carousel-list');
         const carouselItems = Array.from(carouselList.children);
@@ -170,12 +170,39 @@
 
 
     </script>
+    
+
+    <div id="addfeedbackModal" class="feedbackModal">
+        <div class="feedbackModal-content">
+            <span class="closeModal">&times;</span>
+            <p>This is the modal content.</p>
+        </div>
+    </div>
+    <script>
+        // Get the modal
+            var modal = document.getElementById("addfeedbackModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("openSpotlightBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("closeModal")[0];
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+       
+
+    </script>
                 
     </div>
-    <main>
-        
-    </main>
-
     <footer>
         <div class="image-container" id="contact"><img src="/contact.jpg" alt="Contact"></div>
     </footer>

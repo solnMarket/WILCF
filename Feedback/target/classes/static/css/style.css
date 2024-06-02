@@ -6,8 +6,8 @@ body {
     padding: 0;
   }
 
-marquee{
-    z-index: -5;
+ marquee{
+    z-index: -50;
     font-size: 80px;
     position: absolute;
     top: -140px;
@@ -102,6 +102,9 @@ ul.navbar-links a:hover {
 
 /* Feedback */
 #feedbacks {
+    position: relative; /* Ensure the parent has a positioning context */
+}
+.feedbacks {
     padding-left: 5%;
     padding-right: 5%;
     padding-top: 1%;
@@ -113,7 +116,7 @@ ul.navbar-links a:hover {
     
 }
 
-#feedbacks h1 {
+.feedbacks h1 {
     color: #FDCC01;
     align-self: flex-start; /* Align the h1 to the left */
     width: 100%; /* Ensure h1 takes full width */
@@ -123,7 +126,7 @@ ul.navbar-links a:hover {
     font-family: Bahnschrift Condensed;
 }
 
-#feedbacks p {
+.feedbacks p {
     color: #FDCC01;
     margin: 20px 0; /* Add margin for spacing */
     font-size: 25px;
@@ -203,7 +206,7 @@ ul.navbar-links a:hover {
     background-color: #ffe681;
     opacity: 0.4;
     pointer-events: none;
-    z-index: -10;
+    z-index: -100;
     transform: translate(-50%, -50%);
 }
 
@@ -311,4 +314,43 @@ ul.navbar-links a:hover {
 
 .blink-animation {
     animation: blink 0.5s linear;
+}
+
+
+/* Popup Overlay Modal */
+.feedbackModal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scrolling if needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.feedbackModal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Centered */
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px; /* Rounded corners */
+    width: 80%; /* Set width */
+}
+
+/* Close Button */
+.closeModal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeModal:hover,
+.closeModal:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
