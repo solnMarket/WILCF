@@ -1,35 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <title>User Register Page</title>
-<<<<<<< Updated upstream
     <link rel="stylesheet" th:href="@{../css/login.css}">
     <script type="text/javascript" th:src="@{../js/script.js}"></script>
-=======
-    <link rel="stylesheet" href="css/style.css">
-    <script>
-        function validatePasswords() {
-            var password = document.getElementById("password").value;
-            var confirmPassword = document.getElementById("confirmPassword").value;
-            var errorPanel = document.getElementById("errorPanel");
-
-            if (password !== confirmPassword) {
-                errorPanel.textContent = "Passwords do not match!";
-                errorPanel.style.display = "block";
-                return false;
-            } else {
-                errorPanel.style.display = "none";
-            }
-
-            return true;
-        }
-    </script>
->>>>>>> Stashed changes
-</head>
     
+</head>
+
 <body>
     <div class="blocks-container">
         <div id="blocks"></div>
@@ -40,14 +19,8 @@
     </div>
 
     <div class="form">
-<<<<<<< Updated upstream
-        <form method="post" action="/userRegisterPage" th:object="${registerRequest}">
+        <form method="post" action="/userRegisterPage" th:object="${registerRequest}" onsubmit="return validateRegisterPass()">
             <h2 id="Register">Create Account</h2>
-=======
-        <div id="errorPanel" class="error-panel"></div>
-        <form th:action="@{/userRegisterPage}" method="post" onsubmit="return validatePasswords()">
-            <h2>Register</h2>
->>>>>>> Stashed changes
             <div class="input-box">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <input type="text" name="name" placeholder="Full Name" required>
@@ -69,6 +42,14 @@
             </div>
             <a href="/userLoginPage">Already have an account? Login</a>
         </form>
+    </div>
+
+    <!-- The Modal -->
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p id="modalErrorText"></p>
+        </div>
     </div>
 </body>
 

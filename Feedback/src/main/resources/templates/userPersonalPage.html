@@ -3,12 +3,33 @@
 
 <head>
     <title>User Feedback Dashboard</title>
+    <script>
+        function togglePasswordPanel() {
+            var panel1 = document.getElementById("verifyPanel");
+            var panel2 = document.getElementById("passwordPanel");
+            if (panel1.style.display === "none" || panel1.style.display === "") {
+                panel1.style.display = "block";
+            } else {
+                panel1.style.display = "none";
+                panel2.style.display = "none";
+            }
+        }
+
+        function showNewPasswordPanel() {
+            var panel1 = document.getElementById("verifyPanel");
+            var panel2 = document.getElementById("passwordPanel");
+            panel1.style.display = "none";
+            panel2.style.display = "block";
+        }
+    </script>
 </head>
 
 <body>
     <div>
         <a th:href="@{/logout}">Logout</a>
     </div>
+    
+
     <h1 th:text="'We are glad to hear your Feedback, ' + ${userName} + '!'"></h1>
     <form th:action="@{/submitFeedback}" method="post">
         <textarea name="feedback" rows="10" cols="50" required></textarea>
