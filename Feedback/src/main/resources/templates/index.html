@@ -59,9 +59,14 @@
                 <button class="carousel-next">></button>
             </div>
             <p>SPOTlight your journey with WILdcat Innovation Labs</p>
-            <button id="openModalBtn" class="spotlightBtn" th:if="${isUserSignedIn}">Open Modal</button>
-            <button id="redirectToLoginBtn" class="spotlightBtn" th:unless="${isUserSignedIn}" th:onclick="|location.href='@{/userLoginPage}'|">Login</button>
-            <br><br>
+            <!--For testing-->
+            <button id="openSpotlightBtn" class="spotlightBtn">SPOTLIGHT</button>
+            <!--If login is done
+            <button id="openSpotlightBtn" class="spotlightBtn" th:if="${isUserSignedIn}">SPOTLIGHT</button>
+            <button id="openSpotlightBtn" class="spotlightBtn" th:if="${isAdminSignedIn}">SPOTLIGHT</button>
+            -->
+            <!-- <button id="redirectToLoginBtn" class="spotlightBtn" th:unless="${isUserSignedIn}" th:onclick="|location.href='@{/userLoginPage}'|">Login</button>
+            --><br><br>
         </div>
         <div class="circle"></div>
 

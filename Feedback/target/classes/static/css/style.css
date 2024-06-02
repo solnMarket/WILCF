@@ -110,8 +110,7 @@ ul.navbar-links a:hover {
     font-family: arial;
     display: flex;
     flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center items horizontally */
-    text-align: center; /* Center text within the container */
+    
 }
 
 #feedbacks h1 {
@@ -128,6 +127,8 @@ ul.navbar-links a:hover {
     color: #FDCC01;
     margin: 20px 0; /* Add margin for spacing */
     font-size: 25px;
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text within the container */
 
 }
 
@@ -146,7 +147,11 @@ ul.navbar-links a:hover {
     font-size: 16px;
     border-radius: 5px;
     margin-top: 10px; /* Add some margin for spacing */
-    text-align: center; /* Center text inside button */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text within the container */
+    width: fit-content; /* Set the width to fit its content */
+    margin-left: auto; /* Align the button to the right */
+    margin-right: auto; /* Align the button to the left */
 }
 
 .spotlightBtn:hover {
@@ -175,7 +180,7 @@ ul.navbar-links a:hover {
 .userFeedProfile .textContainer {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center the text within the container */
+    justify-content: flex-start ; 
 }
 
 .userFeedProfile .textContainer span {
