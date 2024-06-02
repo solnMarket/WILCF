@@ -11,7 +11,6 @@
 #blocks {
     background-color: #181818;
     width: 100vw;
-    /* Set width to match viewport width */
     height: 100vh;
     display: flex;
     justify-content: flex-start;
@@ -33,14 +32,11 @@
     border-color: #626900;
 }
 
-
 /*Logo*/
 
 .logo img {
     width: 100px;
-    /* Adjust the width of the image */
     height: auto;
-    /* Maintain aspect ratio */
     margin-left: 4%;
     margin-top: 2%;
 }
@@ -52,25 +48,19 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 300px;
-    /* Adjust width as needed */
     margin: auto;
-    /* Center horizontally */
     padding: 30px;
     padding-left: 40px;
     padding-right: 40px;
     border: 2px solid #876c00;
-    /* Border style */
     border-radius: 20px;
-    /* Rounded corners */
     background-color: #FDCC01;
-    /* Background color */
     font-family: Calibri, sans-serif;
     text-align: center;
 }
 
 #WelcomeBack {
     text-align: center;
-    /* Center the heading */
     margin-top: 8%;
     margin-bottom: 0%;
 }
@@ -88,11 +78,8 @@
 
 .form a {
     text-decoration: none;
-    /* Remove underline */
     font-weight: bold;
-    /* Make text bold */
     color: black;
-    /* Set font color to black */
 }
 
 .form a:hover {
@@ -101,52 +88,37 @@
 
 .input-box {
     margin-bottom: 15px;
-    /* Space between input boxes */
 }
 
 .input-box input[type="text"],
 .input-box input[type="email"],
 .input-box input[type="password"] {
     width: 100%;
-    /* Full width input fields */
     padding: 12px;
-    /* Padding for input fields */
     border: 1px solid #ccc;
-    /* Input border */
     border-radius: 5px;
-    /* Rounded corners for input fields */
     box-sizing: border-box;
-    /* Include padding in width */
 }
 
 .input-box input[type="submit"] {
     margin-top: 10%;
     margin-bottom: 10%;
     width: 100%;
-    /* Full width input fields */
     padding: 10px;
-    /* Padding for input fields */
     border: 1px solid #5c5c5c;
-    /* Input border */
     border-radius: 5px;
-    /* Rounded corners for input fields */
     box-sizing: border-box;
-    /* Include padding in width */
 }
 
 .input-box input[type="submit"] {
     background-color: #808080;
-    /* Submit button color */
     color: white;
-    /* Text color for submit button */
     cursor: pointer;
-    /* Cursor style */
 }
 
 .input-box input[type="submit"]:hover {
     background-position: left center;
     background-color: #6e5400;
-    /* Hover color for submit button */
 }
 
 
@@ -155,14 +127,12 @@
     display: none;
     position: fixed;
     z-index: 10000;
-    /* Adjust to bring the modal above other elements */
     left: 0;
     top: 0;
     width: 100vw;
     height: 100vh;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
-    /* Semi-transparent background */
     padding-top: 60px;
 }
 
@@ -171,12 +141,9 @@
     margin: 5% auto;
     padding: 20px;
     border-radius: 20px;
-    /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* Add shadow for depth */
     width: 80%;
     max-width: 400px;
-    /* Adjust maximum width as needed */
 }
 
 .close {
