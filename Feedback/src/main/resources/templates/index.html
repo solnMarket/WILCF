@@ -31,7 +31,7 @@
         <div id="facilities"><img src="/facilities.jpg" alt="Facilities"></div>
         <div id="team"><img src="/team.jpg" alt="Team"></div>
         <div id="feedbacks">
-            <h1>| FEEDBACKS</h1>
+            <h1>| TRUSTED BY MANY</h1>
             <marquee><h3>&nbsp;&nbsp;SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT<br> 
                 SPOTlight your success story SPOTlight your success story SPOTlight <br> 
                 &nbsp;&nbsp;&nbsp;&nbsp;SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT <br>
@@ -61,6 +61,7 @@
             <p>SPOTlight your journey with WILdcat Innovation Labs</p>
             <button id="openModalBtn" class="spotlightBtn" th:if="${isUserSignedIn}">Open Modal</button>
             <button id="redirectToLoginBtn" class="spotlightBtn" th:unless="${isUserSignedIn}" th:onclick="|location.href='@{/userLoginPage}'|">Login</button>
+            <br><br>
         </div>
         <div class="circle"></div>
 
@@ -73,17 +74,17 @@
 
         let currentIndex = 0;
 
-        carouselPrev.addEventListener('click', () => {
-            // Move to the previous item
-            currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-            updateCarousel();
-        });
+        // carouselPrev.addEventListener('click', () => {
+        //     // Move to the previous item
+        //     currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+        //     updateCarousel();
+        // });
 
-        carouselNext.addEventListener('click', () => {
-            // Move to the next item
-            currentIndex = (currentIndex + 1) % carouselItems.length;
-            updateCarousel();
-        });
+        // carouselNext.addEventListener('click', () => {
+        //     // Move to the next item
+        //     currentIndex = (currentIndex + 1) % carouselItems.length;
+        //     updateCarousel();
+        // });
 
         function updateCarousel() {
             carouselItems.forEach((item, index) => {
@@ -101,6 +102,67 @@
         }
 
         updateCarousel();
+
+        carouselNext.addEventListener('click', () => {
+            // Move to the next item
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            
+            // Add blink animation class to the next three cards
+            for (let i = 0; i < 3; i++) {
+                const nextIndex = (currentIndex + i) % carouselItems.length;
+                carouselItems[nextIndex].classList.add('blink-animation');
+            }
+
+            // Remove blink animation class after 500ms
+            setTimeout(() => {
+                for (let i = 0; i < 3; i++) {
+                    const nextIndex = (currentIndex + i) % carouselItems.length;
+                    carouselItems[nextIndex].classList.remove('blink-animation');
+                }
+            }, 500);
+
+            updateCarousel();
+        });
+
+        carouselPrev.addEventListener('click', () => {
+            // Move to the previous item
+            currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+
+            // Add blink animation class to the previous three cards
+            for (let i = 0; i < 3; i++) {
+                const prevIndex = (currentIndex + i) % carouselItems.length;
+                carouselItems[prevIndex].classList.add('blink-animation');
+            }
+
+            // Remove blink animation class after 1000ms
+            setTimeout(() => {
+                for (let i = 0; i < 3; i++) {
+                    const prevIndex = (currentIndex + i) % carouselItems.length;
+                    carouselItems[prevIndex].classList.remove('blink-animation');
+                }
+            }, 1000);
+
+            updateCarousel();
+        });
+
+        let intervalId;
+
+        function startAutomaticTransition() {
+            intervalId = setInterval(() => {
+                // Trigger "Next" button click event
+                carouselNext.click();
+            }, 5000); // Transition every 15 seconds
+        }
+
+        function stopAutomaticTransition() {
+            clearInterval(intervalId);
+        }
+
+        // Start automatic transition initially
+        startAutomaticTransition();
+
+        
+
 
     </script>
                 

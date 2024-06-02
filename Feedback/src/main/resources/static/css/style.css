@@ -133,7 +133,6 @@ ul.navbar-links a:hover {
 
 .carousel-container .feedbackText{
     font-family: 'Times New Roman', Times, serif;
-    font-weight: bold;
     font-style: italic;
     font-size: 28px;
 }
@@ -291,4 +290,20 @@ ul.navbar-links a:hover {
 
 .carousel-list li.inactive {
     transform: translateX(-100%);
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.blink-animation {
+    animation: blink 0.5s linear;
 }
