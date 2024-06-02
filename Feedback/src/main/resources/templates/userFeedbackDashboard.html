@@ -4,21 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <title>User Feedback Dashboard</title>
-    <link rel="stylesheet" href="/css/admin.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/UserDashboard.css">
     <script type="text/javascript" src="/js/script.js"></script>
     <script async src="https://d3kno6bpmj270m.cloudfront.net/widget/userdesk.js" data-userdesk="clwtw2kt70002gsk0xb9dilcp"></script>
 </head>
 
 <body>
+    
+    <div class="blocks-container">
+    <div id="blocks"></div>
+</div>
+
+<div class="logo">
+    <a href="/"><img th:src="@{/123123.png}" alt="Logo"></a>
+</div>
     <h1>My Shared Journeys</h1>
     <table>
         <thead>
             <tr>
-                <th style="width: 40%;">Feedback</th>
-                <th style="width: 30%;">Suggestion</th>
-                <th style="width: 10%;">Privacy</th>
-                <th style="width: 20%;">Actions</th>
+                <th>Feedback</th>
+                <th>Suggestion</th>
+                <th>Privacy</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -65,7 +72,7 @@
                 </td>
             </tr>
         </tbody>
-    </table>
+    </table><br><br><br><br>
 </body>
 
 </html>
