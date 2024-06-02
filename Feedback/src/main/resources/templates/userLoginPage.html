@@ -19,22 +19,8 @@
     <div class="form">
         <form method="post" action="/userLoginPage" th:object="${loginRequest}">
             <h1 id="WelcomeBack">Welcome Back</h1>
-            <p id="subtitle-login">Login to your account    
-            <ul>
-                <li th:each="feedback : ${feedbacks}">
-                    <span th:text="${feedback.feedbackContent}"></span>
-                    <span> by </span>
-                    <span th:text="${feedback.userLogin}"></span>
-                </li>
-            </ul>
+            <p id="subtitle-login">Login to your account
             </p>
-            <ul>
-                <li th:each="feedback : ${feedbacks}">
-                    <span th:text="${feedback.feedbackContent}"></span>
-                    <span> by </span>
-                    <span th:text="${feedback.userLogin}"></span>
-                </li>
-            </ul>
             <div class="input-box">
                 <input type="text" name="email" placeholder="Email" required>
             </div>
