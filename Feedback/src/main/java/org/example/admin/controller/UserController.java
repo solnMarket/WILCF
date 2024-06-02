@@ -31,7 +31,15 @@ public class UserController {
     }
 
     @PostMapping("/userRegisterPage")
-    public String userRegisterPage(@ModelAttribute UserModel userModel) {
+    public String userRegisterPage(@ModelAttribute UserModel userModel,
+                                   @RequestParam("confirmPassword") String confirmPassword,
+                                   Model model) {
+        if (!userModel.getPassword().equals(confirmPassword)) {
+            model.addAttribute("registerRequest", userModel);
+            model.addAttribute("errorMessage", "Passwords do not match!");
+            return "userRegisterPage";
+        }
+
         System.out.println("register request: " + userModel);
         UserModel registerUser = userService.registerUser(userModel.getName(), userModel.getEmail(), userModel.getPassword());
         return registerUser == null ? "errorPage" : "redirect:/userLoginPage";
@@ -83,5 +91,35 @@ public class UserController {
         } else {
             return "errorPage";
         }
+    }
+
+    @PostMapping("/verifyCurrentPassword")
+    public String verifyCurrentPassword(@RequestParam("email") String email,
+                                        @RequestParam("currentPassword") String currentPassword,
+                                        Model model) {
+        if (userService.authenticate(email, currentPassword) != null) {
+            model.addAttribute("notVerified", false);
+        } else {
+            model.addAttribute("notVerified", true);
+            model.addAttribute("errorMessage", "Invalid email or password");
+        }
+        return "changePasswordPage";
+    }
+
+    @PostMapping("/changePassword")
+    public String changePassword(@RequestParam("newPassword") String newPassword,
+                                 @RequestParam("confirmPassword") String confirmPassword,
+                                 @RequestParam("userLogin") String userName,
+                                 Model model) {
+        if (!newPassword.equals(confirmPassword)) {
+            model.addAttribute("notVerified", false);
+            model.addAttribute("passwordErrorMessage", "Passwords do not match");
+        } else if (userService.changePassword(userName, newPassword)) {
+            model.addAttribute("passwordSuccessMessage", "Password changed successfully");
+        } else {
+            model.addAttribute("notVerified", false);
+            model.addAttribute("passwordErrorMessage", "Failed to change password");
+        }
+        return "changePasswordPage";
     }
 }

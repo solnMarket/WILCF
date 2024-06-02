@@ -98,6 +98,35 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+function validateRegisterPass() {
+    var password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("confirmPassword").value;
+    var modal = document.getElementById("errorModal");
+    var errorText = document.getElementById("modalErrorText");
+
+    if (password !== confirmPassword) {
+        errorText.textContent = "Passwords do not match!";
+        modal.style.display = "block";
+        return false;
+    } else {
+        modal.style.display = "none";
+    }
+
+    return true;
+}
+
+function closeModal() {
+    var modal = document.getElementById("errorModal");
+    modal.style.display = "none";
+}
+
+window.onclick = function (event) {
+    var modal = document.getElementById("errorModal");
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
 
 function validatePasswords() {
     var password = document.getElementById("password").value;
