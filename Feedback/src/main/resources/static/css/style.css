@@ -325,7 +325,7 @@ ul.navbar-links a:hover {
     left: 0;
     top: 0;
     width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    height: auto; /* Full height */
     overflow: auto; /* Enable scrolling if needed */
     background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
 }
@@ -335,9 +335,13 @@ ul.navbar-links a:hover {
     background-color: #fefefe;
     margin: 15% auto; /* Centered */
     padding: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
     border: 1px solid #888;
     border-radius: 10px; /* Rounded corners */
-    width: 80%; /* Set width */
+    max-width: 400px; /* Adjust the width as needed */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
 }
 
 /* Close Button */
@@ -354,3 +358,85 @@ ul.navbar-links a:hover {
     text-decoration: none;
     cursor: pointer;
 }
+
+/* Feedback Modal Content */
+.feedbackModal h1 {
+    text-align: center;
+    font-size: 40px;
+    font-family: 'Bahnschrift Condensed', sans-serif;
+    margin: 0;
+    color: #FDCC01;
+}
+
+.feedbackModal h3 {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.feedbackModal p {
+    text-align: left; /* Align left */
+    margin: 10px 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+#feedbackTextModal {
+    max-width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    box-sizing: border-box; /* Include padding and border in width */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#suggestionTextModal {
+    width: 100%; /* Full width */
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    box-sizing: border-box; /* Include padding and border in width */
+}
+
+#checkboxNameIsPublic {
+    vertical-align: middle; /* Align checkbox with text */
+    margin-right: 5px; /* Add space between checkbox and text */
+}
+
+.input-box {
+    text-align: center; /* Align center */
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center; /* Center items vertically */
+}
+
+.checkbox-container p {
+    margin-right: 10px; /* Add spacing between the paragraph and checkbox */
+}
+
+input[type="checkbox"] {
+    width: 20px; /* Adjust width */
+    height: 20px; /* Adjust height */
+}
+
+.input-box input[type="submit"] {
+    background: linear-gradient(to bottom, white, #FDCC01);
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.input-box input[type="submit"]:hover {
+    background: #FDCC01;
+}
+
+

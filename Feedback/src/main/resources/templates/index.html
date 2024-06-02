@@ -175,7 +175,19 @@
     <div id="addfeedbackModal" class="feedbackModal">
         <div class="feedbackModal-content">
             <span class="closeModal">&times;</span>
-            <p>This is the modal content.</p>
+            <h1>Journey with WIL</h1>
+            <h3>a feedback for WILdcat Innovation Labs</h3>
+            <label for="feedbackTextModal">Share your story:</label><br>
+            <textarea id="feedbackTextModal" name="inputField" maxlength="255" required rows="4" cols="46"></textarea>
+            <div class="checkbox-container">
+                <p>Show my name publicly</p>
+                <input type="checkbox" id="checkboxNameIsPublic" name="checkbox"checked>
+            </div>
+            <p>Any suggestions for improvement? (Optional)</p><br>
+            <input type="text" id="suggestionTextModal" name="inputField" maxlength="255">
+            <div class="input-box">
+                <input type="submit" value="Share">
+            </div>
         </div>
     </div>
     <script>
