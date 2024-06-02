@@ -134,13 +134,13 @@
                 carouselItems[prevIndex].classList.add('blink-animation');
             }
 
-            // Remove blink animation class after 500ms
+            // Remove blink animation class after 1000ms
             setTimeout(() => {
                 for (let i = 0; i < 3; i++) {
                     const prevIndex = (currentIndex + i) % carouselItems.length;
                     carouselItems[prevIndex].classList.remove('blink-animation');
                 }
-            }, 500);
+            }, 1000);
 
             updateCarousel();
         });
