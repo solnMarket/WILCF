@@ -1,10 +1,16 @@
 html {
     scroll-behavior: smooth;
 }
-
 body {
     margin: 0;
     padding: 0;
+  }
+
+marquee{
+    z-index: -5;
+    font-size: 80px;
+    position: absolute;
+    top: -140px;
 }
 
 .image-container img {
@@ -15,39 +21,31 @@ body {
     border: 0;
     box-sizing: border-box;
     display: block;
-}
+  }
 
 /* NAV BAR */
 .nav {
-    display: flex;
-    /* Add this line */
+    display: flex; /* Add this line */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding-top: 2.5%;
-    /* Add some padding above the nav */
+    padding-top: 2.5%; /* Add some padding above the nav */
     font-family: arial;
     font-size: 15px;
-    background-color: transparent;
-    /* Default transparent background */
-    transition: background-color 0.3s, padding-top 0.4s;
-    /* Smooth transition for background color */
+    background-color: transparent; /* Default transparent background */
+    transition: background-color 0.3s, padding-top 0.4s; /* Smooth transition for background color */
 }
 
 .nav.scrolled {
-    background-color: rgba(0, 0, 0, 0.8);
-    /* Opaque background on scroll */
-    padding-top: 1%;
-    /* Add some padding above the nav */
+    background-color: rgba(0, 0, 0, 0.8); /* Opaque background on scroll */
+    padding-top: 1%; /* Add some padding above the nav */
 }
 
 .logo-image img {
-    height: 60px;
-    /* Adjust the height as needed */
-    width: auto;
-    /* Let the width adjust proportionally */
+    height: 60px; /* Adjust the height as needed */
+    width: auto; /* Let the width adjust proportionally */
     margin: 10px;
 }
 
@@ -58,15 +56,12 @@ ul.navbar-links {
     list-style: none;
     padding: 0;
     margin: 0;
-    height: 60px;
-    /* Adjust as needed */
-    padding-left: 6.3%;
-    /* Add some padding to the left of the nav */
+    height: 60px; /* Adjust as needed */
+    padding-left: 6.3%; /* Add some padding to the left of the nav */
 }
 
 ul.navbar-links li {
-    margin: 0 15px;
-    /* Reduce the spacing between the links */
+    margin: 0 15px; /* Reduce the spacing between the links */
 }
 
 @media (max-width: 768px) {
@@ -80,15 +75,12 @@ ul.navbar-links li {
 }
 
 ul.navbar-links a {
-    color: #9E9E9E;
-    /* Set the text color to black */
-    text-decoration: none;
-    /* Remove the underline from the hyperlinks */
+    color: #9E9E9E; /* Set the text color to black */
+    text-decoration: none; /* Remove the underline from the hyperlinks */
 }
 
 ul.navbar-links a:hover {
-    text-decoration: underline;
-    /* Add an underline on hover */
+    text-decoration: underline; /* Add an underline on hover */
 }
 
 .auth {
@@ -117,41 +109,33 @@ ul.navbar-links a:hover {
     color: black;
     font-family: arial;
     display: flex;
-    flex-direction: column;
-    /* Stack children vertically */
-    align-items: center;
-    /* Center items horizontally */
-    text-align: center;
-    /* Center text within the container */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text within the container */
 }
 
 #feedbacks h1 {
     color: #FDCC01;
-    align-self: flex-start;
-    /* Align the h1 to the left */
-    width: 100%;
-    /* Ensure h1 takes full width */
-    text-align: left;
-    /* Align text inside h1 to the left */
-    padding-left: 0;
-    /* Adjust padding if needed */
+    align-self: flex-start; /* Align the h1 to the left */
+    width: 100%; /* Ensure h1 takes full width */
+    text-align: left; /* Align text inside h1 to the left */
+    padding-left: 0; /* Adjust padding if needed */
     font-size: 40px;
     font-family: Bahnschrift Condensed;
 }
 
 #feedbacks p {
     color: #FDCC01;
-    margin: 20px 0;
-    /* Add margin for spacing */
+    margin: 20px 0; /* Add margin for spacing */
     font-size: 25px;
 
 }
 
-.carousel-container .feedbackText {
+.carousel-container .feedbackText{
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold;
     font-style: italic;
-    font-size: 30px;
+    font-size: 28px;
 }
 
 .spotlightBtn {
@@ -162,22 +146,18 @@ ul.navbar-links a:hover {
     color: black;
     font-size: 16px;
     border-radius: 5px;
-    margin-top: 10px;
-    /* Add some margin for spacing */
-    text-align: center;
-    /* Center text inside button */
+    margin-top: 10px; /* Add some margin for spacing */
+    text-align: center; /* Center text inside button */
 }
 
 .spotlightBtn:hover {
-    background: #FDCC01;
-    /* Change to bottom */
+    background: #FDCC01; /* Change to bottom */
 }
 
 /* User name and Icon on every feedback list */
 .userFeedProfile {
     display: flex;
-    align-items: flex-start;
-    /* Align items at the start to keep them aligned to the top */
+    align-items: flex-start; /* Align items at the start to keep them aligned to the top */
     position: absolute;
     bottom: 0;
     left: 0;
@@ -186,22 +166,17 @@ ul.navbar-links a:hover {
 }
 
 .userFeedProfile .profileIcon {
-    width: 70px;
-    /* Adjust as needed */
-    height: 70px;
-    /* Adjust as needed */
+    width: 70px; /* Adjust as needed */
+    height: 70px; /* Adjust as needed */
     border-radius: 50%;
-    margin-right: 10px;
-    /* Add some margin to the right of the icon */
-    object-fit: cover;
-    /* Ensures the image fits within the specified dimensions */
+    margin-right: 10px; /* Add some margin to the right of the icon */
+    object-fit: cover; /* Ensures the image fits within the specified dimensions */
 }
 
 .userFeedProfile .textContainer {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    /* Center the text within the container */
+    justify-content: center; /* Center the text within the container */
 }
 
 .userFeedProfile .textContainer span {
@@ -210,10 +185,8 @@ ul.navbar-links a:hover {
 }
 
 .carousel-item {
-    position: relative;
-    /* Make sure the parent container is positioned relative */
-    padding-bottom: 60px;
-    /* Add some padding to accommodate the user profile at the bottom */
+    position: relative; /* Make sure the parent container is positioned relative */
+    padding-bottom: 60px; /* Add some padding to accommodate the user profile at the bottom */
 }
 
 
@@ -226,7 +199,7 @@ ul.navbar-links a:hover {
     background-color: #ffe681;
     opacity: 0.4;
     pointer-events: none;
-    z-index: -1;
+    z-index: -10;
     transform: translate(-50%, -50%);
 }
 
@@ -235,14 +208,13 @@ ul.navbar-links a:hover {
         transform: translate(-50%, -50%) scale(1);
         opacity: 0.5;
     }
-
     100% {
         transform: translate(-50%, -50%) scale(0.5);
         opacity: 0;
     }
 }
 
-.body_index {
+.body_index{
     background-color: black;
     z-index: -5;
 }
@@ -252,8 +224,7 @@ ul.navbar-links a:hover {
     position: relative;
     overflow: hidden;
     width: 100%;
-    margin-top: 20px;
-    /* Add margin space between the buttons and the item list */
+    margin-top: 20px; /* Add margin space between the buttons and the item list */
 }
 
 .carousel-list {
@@ -268,11 +239,9 @@ ul.navbar-links a:hover {
 }
 
 .carousel-item {
-    flex: 0 0 calc(33.33% - 20px);
-    /* adjust the width of each item and subtract the margin */
+    flex: 0 0 calc(33.33% - 20px); /* adjust the width of each item and subtract the margin */
     height: 350px;
-    margin: 0 20px;
-    /* Increase margin between items */
+    margin: 0 20px; /* Increase margin between items */
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -286,31 +255,21 @@ ul.navbar-links a:hover {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    margin-top: -20px;
-    /* Adjust to vertically align buttons with carousel items */
-    background: none;
-    /* Remove background color */
-    border: none;
-    /* Remove border */
-    color: white;
-    /* Use inherited text color */
-    font-size: 1.5em;
-    /* Adjust font size as needed */
-    padding: 0;
-    /* Remove padding */
-    margin: 0;
-    /* Remove margin */
-    text-decoration: none;
-    /* Ensure no text decoration */
+    margin-top: -20px; /* Adjust to vertically align buttons with carousel items */
+    background: none; /* Remove background color */
+    border: none; /* Remove border */
+    color: white; /* Use inherited text color */
+    font-size: 1.5em; /* Adjust font size as needed */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+    text-decoration: none; /* Ensure no text decoration */
 
 }
 
 .carousel-prev:hover,
 .carousel-next:hover {
-    background: none;
-    /* Ensure no background color on hover */
-    color: #ccc;
-    /* Optional: Change text color on hover */
+    background: none; /* Ensure no background color on hover */
+    color: #ccc; /* Optional: Change text color on hover */
 }
 
 .carousel-prev {
