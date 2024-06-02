@@ -47,8 +47,7 @@
                 <div class="topFeedback">
                     <h1>| TRUSTED BY MANY</h1>
                     <!--For testing  User Side-->
-                <button id="openMyFeedbacksBtn" class="MyFeedbacksBtn">My Shared Journeys</button>
-            </div>
+                </div>
                 <div class="carousel-container">
                     <ul class="carousel-list">
                         <li th:each="feedback : ${feedbacks}" class="carousel-item">
@@ -181,6 +180,11 @@
                 modal.style.display = "none";
             }
         }
+
+        // Add the event listener for the button click
+        document.getElementById("openMyFeedbacksBtn").addEventListener("click", function() {
+            window.location.href = "userFeedbackDashboard.html";
+        });
     </script>
 </body>
 
