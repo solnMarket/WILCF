@@ -4,13 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Error</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>
-    <h1>
-        You entered incorrect data! Please retry your action again.
-    </h1>
+    <div class="blocks-container">
+        <div id="blocks"></div>
+    </div>
+
+    <div class="logo">
+        <a href="/"><img th:src="@{/123123.png}" alt="Logo"></a>
+    </div>
     <div class="form">
+        <h2>
+            You entered incorrect data! Please retry your action again.
+        </h2>
         <form method="post" action="/userLoginPage" th:object="${loginRequest}">
             <h2>Login</h2>
             <div class="input-box">
