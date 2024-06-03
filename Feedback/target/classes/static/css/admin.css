@@ -4,7 +4,9 @@ body {
     background-color: #000000;
     color: #000000;
     text-align: middle;
-    margin: 0;
+    margin-top: 3%;
+    margin-left: 5%;
+    margin-right: 5%;
     padding: 0;
 }
 
@@ -24,7 +26,7 @@ form {
 
 /* Table Styles */
 table {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     border-collapse: collapse;
     background-color: #ffffff;
@@ -115,13 +117,17 @@ button:hover {
     background: #FDCC01;
 }
 
-a {
+.logoutBtn {
+    text-align: right;
+}
+
+.logoutBtn a {
     color: #FFD700;
     text-decoration: none;
     font-weight: bold;
 }
 
-a:hover {
+.logoutBtn a:hover {
     text-decoration: underline;
 }
 
@@ -161,4 +167,41 @@ a:hover {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+
+
+
+.blocks-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+}
+
+#blocks {
+    background-color: #181818;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+    overflow: hidden;
+    z-index: 10000;
+    flex-wrap: wrap;
+}
+
+.block {
+    width: 50px;
+    height: 50px;
+    border: 0.5px solid rgba(34, 34, 34, 0.075);
+    transition: border-color 0.3s ease;
+    flex-wrap: wrap;
+}
+
+.highlight {
+    border-color: #626900;
 }
