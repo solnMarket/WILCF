@@ -56,12 +56,4 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getResetToken() {
-        return resetToken;
-    }
-
-    public void setResetToken(String resetToken) {
-        this.resetToken = resetToken;
-    }
 }

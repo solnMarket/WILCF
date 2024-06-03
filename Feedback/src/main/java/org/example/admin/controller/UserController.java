@@ -66,36 +66,6 @@ public class UserController {
         return "forgotPasswordPage";
     }
 
-    @PostMapping("/forgotPassword")
-    public String processForgotPassword(@RequestParam("email") String email) {
-        userService.sendPasswordResetEmail(email);
-        return "redirect:/userLoginPage";
-    }
-
-    @GetMapping("/resetPasswordPage")
-    public String showResetPasswordPage(@RequestParam("token") String token, Model model) {
-        if (userService.validatePasswordResetToken(token)) {
-            model.addAttribute("token", token);
-            return "resetPasswordPage";
-        } else {
-            return "errorPage";
-        }
-    }
-
-    @PostMapping("/resetPassword")
-    public String processResetPassword(@RequestParam("token") String token,
-                                       @RequestParam("newPassword") String newPassword,
-                                       @RequestParam("confirmPassword") String confirmPassword) {
-        if (!newPassword.equals(confirmPassword)) {
-            return "redirect:/resetPasswordPage?token=" + token + "&error=passwordMismatch";
-        }
-        if (userService.resetPassword(token, newPassword)) {
-            return "redirect:/userLoginPage";
-        } else {
-            return "errorPage";
-        }
-    }
-
     @PostMapping("/verifyCurrentPassword")
     public String verifyCurrentPassword(@RequestParam("email") String email,
                                         @RequestParam("currentPassword") String currentPassword,

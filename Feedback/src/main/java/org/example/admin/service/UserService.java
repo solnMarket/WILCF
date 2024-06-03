@@ -2,7 +2,6 @@ package org.example.admin.service;
 
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.example.admin.Entity.User;
 import org.example.admin.model.UserModel;
@@ -58,35 +57,6 @@ public class UserService implements UserDetailsService{
             logger.warn("No user found with email: {}", email);
         }
         return null;
-    }
-
-    public void sendPasswordResetEmail(String email) {
-        Optional<User> userOptional = userRepository.findByEmail(email);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            String token = UUID.randomUUID().toString();
-            user.setResetToken(token);
-            userRepository.save(user);
-
-            // Code to send email with reset link (including the token)
-            // e.g., emailService.sendPasswordResetEmail(user.getEmail(), token);
-        }
-    }
-
-    public boolean validatePasswordResetToken(String token) {
-        return userRepository.findByResetToken(token).isPresent();
-    }
-
-    public boolean resetPassword(String token, String newPassword) {
-        Optional<User> userOptional = userRepository.findByResetToken(token);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            user.setPassword(passwordEncoder.encode(newPassword));
-            user.setResetToken(null);
-            userRepository.save(user);
-            return true;
-        }
-        return false;
     }
 
     @Override
