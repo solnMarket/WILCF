@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Wildcat Innovation Labs</title>
-    <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css"> <!-- Add your stylesheet here -->
     <script type="text/javascript" src="/js/script.js"></script>
     <script async src="https://d3kno6bpmj270m.cloudfront.net/widget/userdesk.js" data-userdesk="clwtw2kt70002gsk0xb9dilcp"></script>
@@ -42,8 +41,7 @@
                 &nbsp;&nbsp;SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT SPOT<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;SPOTlight your success story SPOTlight your <br> 
                 &nbsp;SPOTlight your success story SPOTlight your success story SPOT<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;SPOT SPOT SPOTlight your success story SPOTlight
-                &nbsp;SPOTlight your success story SPOTlight your success story SPOT 
+                &nbsp;&nbsp;&nbsp;SPOT SPOT SPOTlight your success story SPOTlight
             </h3></marquee>
             <div class="feedbacks">
                 <div class="topFeedback">
@@ -146,13 +144,13 @@
                 carouselItems[prevIndex].classList.add('blink-animation');
             }
 
-            // Remove blink animation class after 1000ms
+            // Remove blink animation class after 1500ms
             setTimeout(() => {
                 for (let i = 0; i < 3; i++) {
                     const prevIndex = (currentIndex + i) % carouselItems.length;
                     carouselItems[prevIndex].classList.remove('blink-animation');
                 }
-            }, 1000);
+            }, 1500);
 
             updateCarousel();
         });
