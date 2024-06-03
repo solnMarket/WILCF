@@ -489,8 +489,8 @@ input[type="checkbox"] {
 
 
 .updateBtn {
-    background: linear-gradient(to bottom, white, #ccf466);
-    border: none;
+    background-color: transparent;
+    border-color: #FDCC01;
     color: black;
     padding: 10px 20px;
     text-align: center;
@@ -503,5 +503,5 @@ input[type="checkbox"] {
 }
 
 .updateBtn:hover {
-    background: #ccf466;
+    background: #FDCC01;
 }
