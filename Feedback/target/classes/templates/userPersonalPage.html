@@ -52,7 +52,7 @@
                 <div class="topFeedback">
                     <h1>| TRUSTED BY MANY</h1>
                     <!--For testing  User Side-->
-                    <button id="openMyFeedbacksBtn" class="MyFeedbacksBtn">My Shared Journeys</button>
+                    <a href="#shareButton"><button id="openMyFeedbacksBtn" class="MyFeedbacksBtn">My Shared Journeys</button></a>
                 </div>
                 <div class="carousel-container">
                     <ul class="carousel-list">
@@ -135,7 +135,7 @@
                         <td>
                             <!-- Feedbacks -->
                             <span th:if="${!feedback.editMode}" th:text="${feedback.feedbackContent}"></span>
-                            <form th:if="${feedback.editMode}" th:action="@{/updateFeedback}" method="post" style="display: flex; flex-direction: column;">
+                            <form th:if="${feedback.editMode}" th:action="@{/personal/updateFeedback}" method="post" style="display: flex; flex-direction: column;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                                     <div style="margin-right: 15px;"> <!-- Adjust margin-right for space -->
                                         <textarea name="editedFeedback" th:text="${feedback.feedbackContent}" rows="10" cols="23" style="resize: vertical;" required></textarea>

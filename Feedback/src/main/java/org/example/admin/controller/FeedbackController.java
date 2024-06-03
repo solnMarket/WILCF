@@ -67,7 +67,7 @@ public String toggleFeedbackSelection(@RequestParam("id") Long id, @RequestParam
         feedbackService.submitFeedback(feedbackContent, publicFeedback, userLogin, suggestion);
         model.addAttribute("userName", userLogin);
         model.addAttribute("feedbacks", feedbackService.getFeedbacksByUser(userLogin));
-        return "redirect:/userPersonalPage?userLogin=" + userLogin;
+        return "redirect:/userPersonalPage?userLogin=" + userLogin + "#feedbacks";
     }
     
     @GetMapping("/feedbackDashboard")
@@ -131,7 +131,7 @@ public String updateFeedback(@RequestParam("id") Long id,
     @PostMapping("/personal/deleteFeedback")
     public String personalDeleteFeedback(@RequestParam("id") Long id, @RequestParam("userLogin") String userLogin) {
         feedbackService.deleteFeedback(id);
-        return "redirect:/userPersonalPage?userLogin=" + userLogin;
+        return "redirect:/userPersonalPage?userLogin=" + userLogin + "#feedbacks";
     }
  
     @PostMapping("/personal/toggleVisibility")
@@ -139,7 +139,7 @@ public String updateFeedback(@RequestParam("id") Long id,
                                    @RequestParam("isPublic") boolean isPublic,
                                    @RequestParam("userLogin") String userLogin) {
         feedbackService.updateFeedbackVisibility(id, isPublic);
-        return "redirect:/userPersonalPage?userLogin=" + userLogin;
+        return "redirect:/userPersonalPage?userLogin=" + userLogin + "#feedbacks";
     }
  
     @PostMapping("/personal/toggleEditMode")
@@ -149,7 +149,7 @@ public String updateFeedback(@RequestParam("id") Long id,
             feedback.setEditMode(editMode);
             feedbackService.save(feedback);
         }
-        return "redirect:/userPersonalPage?userLogin=" + userLogin;
+        return "redirect:/userPersonalPage?userLogin=" + userLogin + "#feedbacks";
     }
  
     @PostMapping("/personal/updateFeedback")
@@ -164,7 +164,7 @@ public String updateFeedback(@RequestParam("id") Long id,
             feedback.setEditMode(false);
             feedbackService.save(feedback);
         }
-        return "redirect:/userPersonalPage?userLogin=" + userLogin;
+        return "redirect:/userPersonalPage?userLogin=" + userLogin + "#feedbacks";
     }
     @GetMapping("/generalFeedbackDashboard")
     public String generalFeedbackDashboard(Model model) {
