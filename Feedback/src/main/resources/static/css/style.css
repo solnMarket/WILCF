@@ -353,7 +353,7 @@ ul.navbar-links a:hover {
 
 /* MyFeedbacksModal */
 #myFeedbacksModal .feedbackModal-content {
-    width: 800px;
+    width: 990px;
     margin-top: 5%; /* Adjust this value to move the modal higher */
     padding: 20px;
 
@@ -484,4 +484,24 @@ input[type="checkbox"] {
 #careText{
     font-size: 20px;
     color: #202020;
+}
+
+
+
+.updateBtn {
+    background: linear-gradient(to bottom, white, #ccf466);
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 237px;
+}
+
+.updateBtn:hover {
+    background: #ccf466;
 }
