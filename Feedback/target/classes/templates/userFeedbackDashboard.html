@@ -34,8 +34,8 @@
                     <!-- Feedbacks -->
                     <span th:if="${!feedback.editMode}" th:text="${feedback.feedbackContent}"></span>
                     <form th:if="${feedback.editMode}" th:action="@{/updateFeedback}" method="post">
-                        <textarea name="editedFeedback" th:text="${feedback.feedbackContent}" rows="2" cols="50" required></textarea>
-                        <textarea name="editedSuggestion" th:text="${feedback.suggestion}" rows="2" cols="50"></textarea>
+                        <textarea name="editedFeedback" th:text="${feedback.feedbackContent}" rows="10" cols="50" required></textarea>
+                        <textarea name="editedSuggestion" th:text="${feedback.suggestion}" rows="10" cols="50"></textarea>
                         <input type="hidden" name="id" th:value="${feedback.id}" />
                         <input type="hidden" name="userLogin" th:value="${userName}" />
                         <input type="submit" value="Update" />
@@ -73,6 +73,7 @@
             </tr>
         </tbody>
     </table><br><br><br><br>
+    <a th:href="@{/userPersonalPage(userLogin=${userName})}">Back to the Personal Page</a>
 </body>
 
 </html>

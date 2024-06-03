@@ -1,8 +1,6 @@
 package org.example.admin.controller;
  
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.example.admin.model.FeedbackModel;
 import org.example.admin.service.FeedbackService;
@@ -13,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
  
 @Controller
@@ -70,7 +67,7 @@ public String toggleFeedbackSelection(@RequestParam("id") Long id, @RequestParam
         feedbackService.submitFeedback(feedbackContent, publicFeedback, userLogin, suggestion);
         model.addAttribute("userName", userLogin);
         model.addAttribute("feedbacks", feedbackService.getFeedbacksByUser(userLogin));
-        return "userFeedbackDashboard";
+        return "redirect:/userPersonalPage?userLogin=" + userLogin;
     }
     
     @GetMapping("/feedbackDashboard")
@@ -86,7 +83,7 @@ public String toggleFeedbackSelection(@RequestParam("id") Long id, @RequestParam
         model.addAttribute("selectedFeedbacks", feedbackService.getSelectedFeedbacks());
         return "userPersonalPage";
     }
- 
+    
     @PostMapping("/deleteFeedback")
     public String deleteFeedback(@RequestParam("id") Long id, @RequestParam("userLogin") String userLogin) {
         feedbackService.deleteFeedback(id);
@@ -131,7 +128,44 @@ public String updateFeedback(@RequestParam("id") Long id,
     return "redirect:/userFeedbackDashboard?userLogin=" + userLogin;
 }
 
+    @PostMapping("/personal/deleteFeedback")
+    public String personalDeleteFeedback(@RequestParam("id") Long id, @RequestParam("userLogin") String userLogin) {
+        feedbackService.deleteFeedback(id);
+        return "redirect:/userPersonalPage?userLogin=" + userLogin;
+    }
  
+    @PostMapping("/personal/toggleVisibility")
+    public String personalToggleVisibility(@RequestParam("id") Long id,
+                                   @RequestParam("isPublic") boolean isPublic,
+                                   @RequestParam("userLogin") String userLogin) {
+        feedbackService.updateFeedbackVisibility(id, isPublic);
+        return "redirect:/userPersonalPage?userLogin=" + userLogin;
+    }
+ 
+    @PostMapping("/personal/toggleEditMode")
+    public String personalToggleEditMode(@RequestParam("id") Long id, @RequestParam("editMode") boolean editMode, @RequestParam("userLogin") String userLogin) {
+        FeedbackModel feedback = feedbackService.getFeedbackById(id);
+        if (feedback != null) {
+            feedback.setEditMode(editMode);
+            feedbackService.save(feedback);
+        }
+        return "redirect:/userPersonalPage?userLogin=" + userLogin;
+    }
+ 
+    @PostMapping("/personal/updateFeedback")
+    public String personalUpdateFeedback(@RequestParam("id") Long id,
+                                @RequestParam("editedFeedback") String editedFeedback,
+                                @RequestParam("editedSuggestion") String editedSuggestion,
+                                @RequestParam("userLogin") String userLogin) {
+        FeedbackModel feedback = feedbackService.getFeedbackById(id);
+        if (feedback != null) {
+            feedback.setFeedbackContent(editedFeedback);
+            feedback.setSuggestion(editedSuggestion);
+            feedback.setEditMode(false);
+            feedbackService.save(feedback);
+        }
+        return "redirect:/userPersonalPage?userLogin=" + userLogin;
+    }
     @GetMapping("/generalFeedbackDashboard")
     public String generalFeedbackDashboard(Model model) {
         model.addAttribute("feedbacks", feedbackService.getAllFeedbacks());
