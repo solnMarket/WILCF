@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class UserController {
 
@@ -121,5 +124,14 @@ public class UserController {
             model.addAttribute("passwordErrorMessage", "Failed to change password");
         }
         return "changePasswordPage";
+    }
+
+    @GetMapping("/Logout")
+    public String logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        return "redirect:/";
     }
 }

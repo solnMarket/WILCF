@@ -89,7 +89,7 @@ input[type="checkbox"] {
     margin: auto;
 }
 
-button {
+.feedbackModal button {
     background: linear-gradient(to bottom, white, #FDCC01);
     border: none;
     padding: 10px 20px;
@@ -111,14 +111,13 @@ button {
     /* Align the button to the left */
 }
 
-button:hover {
+.feedbackModal button:hover {
     background: #FDCC01;
 }
 
 a {
     color: #FFD700;
     text-decoration: none;
-    font-weight: bold;
 }
 
 a:hover {
@@ -251,76 +250,37 @@ a:hover {
     color: rgb(102, 92, 0);
 }
 
-.input-box {
-    margin-bottom: 15px;
-}
 
-.input-box input[type="text"],
-.input-box input[type="email"],
-.input-box input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.input-box input[type="submit"] {
-    margin-top: 10%;
-    margin-bottom: 10%;
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #5c5c5c;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.input-box input[type="submit"] {
-    background-color: #808080;
-    color: white;
-    cursor: pointer;
-}
-
-.input-box input[type="submit"]:hover {
-    background-position: left center;
-    background-color: #6e5400;
-}
-
-
-/* Modal styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 10000;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 60px;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 400px;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
+.userFeedbackDashboard button{
+    background: linear-gradient(to bottom, white, #FDCC01);
+    border: none;
     color: black;
+    padding: 10px 20px;
+    text-align: center;
     text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
     cursor: pointer;
+    border-radius: 5px;
+}
+
+.userFeedbackDashboard button:hover {
+    background: #FDCC01;
+}
+
+.userFeedbackDashboard input[type="submit"] {
+    background: linear-gradient(to bottom, white, #FDCC01);
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.userFeedbackDashboard input[type="submit"]:hover {
+    background: #FDCC01;
 }

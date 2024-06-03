@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Wildcat Innovation Labs</title>
     <link rel="stylesheet" href="/css/style.css"> <!-- Add your stylesheet here -->
+    <link rel="stylesheet" href="/css/UserDashboard.css">
     <script type="text/javascript" src="/js/script.js"></script>
     <script async src="https://d3kno6bpmj270m.cloudfront.net/widget/userdesk.js" data-userdesk="clwtw2kt70002gsk0xb9dilcp"></script>
 </head>
@@ -12,7 +13,7 @@
 <body class="body_index">
     <nav class="nav">
         <ul class="navbar-links">
-            <li><a href="/" class="logo-image"><img src="/123123.png" alt="Logo"></a></li>
+            <li><a href="#home" class="logo-image"><img src="/123123.png" alt="Logo"></a></li>
             <li><a href="#incubatees">Incubatees</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#thrusts">Thrusts</a></li>
@@ -21,6 +22,9 @@
             <li><a href="#feedbacks">Feedback</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
+        <div class="auth">
+        <a th:href="@{/Logout}">Logout</a>
+        </div>
     </nav>
 
     <div class="image-container">
@@ -47,27 +51,25 @@
                 <div class="topFeedback">
                     <h1>| TRUSTED BY MANY</h1>
                     <!--For testing  User Side-->
+                    <button id="openMyFeedbacksBtn" class="MyFeedbacksBtn">My Shared Journeys</button>
                 </div>
                 <div class="carousel-container">
                     <ul class="carousel-list">
-                        <li th:each="feedback : ${feedbacks}" class="carousel-item">
-                                "<span class="feedbackText" th:text="${feedback.feedbackContent}"></span>"
-                                <pre>
-                                </pre>
-                            "<span th:if="${!feedback.editMode}" th:text="${feedback.suggestion}"></span>"
+                        <li th:each="selectedFeedback : ${selectedFeedbacks}" class="carousel-item">
+                            "<span class="feedbackText" th:text="${selectedFeedback.feedbackContent}"></span>"
                             <div class="userFeedProfile">
                                 <img src="/icon.jpg" class="profileIcon" alt="Icon">
                                 <div class="textContainer">
                                     <span> by </span><br>
-                                    <span class="userFullName" th:text="${feedback.isPublic ? feedback.userLogin : 'Anonymous'}"></span>
-                                </div>
+                                    <span class="userFullName" th:text="${selectedFeedback.isPublic? selectedFeedback.userLogin : selectedFeedback.censoredName}"></span>
+                                </div> 
                             </div>
                         </li>
                     </ul>
                     <button class="carousel-prev"><</button>
                     <button class="carousel-next">></button>
                 </div>
-                <p>Care to share your story and SPOTlight your journey with WILdcat Innovation Labs</p>
+                <p><span id="careText">Care to share your story</span><br> SPOTlight your journey with WILdcat Innovation Labs</p>
                 <button id="openSpotlightBtn" class="spotlightBtn">SPOTLIGHT</button>
                 <br><br>
             </div>
@@ -84,7 +86,7 @@
             <span class="closeModal">&times;</span>
             <h1>Journey with WIL</h1>
             <h3>a feedback for WILdcat Innovation Labs</h3>
-            <form th:action="@{/submitFeedback}" method="post">
+            <form id="feedbackForm" th:action="@{/submitFeedback}" method="post">
                 <label for="feedbackTextModal">Share your story:</label><br>
                 <textarea id="feedbackTextModal" name="feedback" maxlength="255" required rows="4" cols="46"></textarea>
                 
@@ -104,6 +106,113 @@
             </form>
         </div>
     </div>
+
+    <div id="thankYouModal" class="feedbackModal">
+        <div class="feedbackModal-content">
+            <span class="closeThankYouModal">&times;</span>
+            <h1>Thank you!</h1>
+            <p>Your feedback has been received.</p>
+        </div>
+    </div>
+
+    <div id="myFeedbacksModal" class="feedbackModal">
+        <div class="feedbackModal-content">
+            <span class="closeModal">&times;</span>
+            <h1>Shared Journey with WIL</h1>
+            <h3>a feedback for WILdcat Innovation Labs</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feedback</th>
+                        <th>Suggestion</th>
+                        <th>Privacy</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="feedback : ${feedbacks}">
+                        <td>
+                            <!-- Feedbacks -->
+                            <span th:if="${!feedback.editMode}" th:text="${feedback.feedbackContent}"></span>
+                            <form th:if="${feedback.editMode}" th:action="@{/updateFeedback}" method="post">
+                                <textarea name="editedFeedback" th:text="${feedback.feedbackContent}" rows="2" cols="50" required></textarea>
+                                <textarea name="editedSuggestion" th:text="${feedback.suggestion}" rows="2" cols="50"></textarea>
+                                <input type="hidden" name="id" th:value="${feedback.id}" />
+                                <input type="hidden" name="userLogin" th:value="${userName}" />
+                                <input type="submit" value="Update" />
+                            </form>
+                        </td>
+                        <td>
+                            <!-- Suggestions -->
+                            <span th:if="${!feedback.editMode}" th:text="${feedback.suggestion}"></span>
+                        </td>
+                        <td th:text="${feedback.isPublic ? 'Public' : 'Private'}"></td>
+                        <td>
+                            <!-- Form for deleting feedback -->
+                            <form th:if="${!feedback.editMode}" th:action="@{/deleteFeedback}" method="post">
+                                <input type="hidden" name="id" th:value="${feedback.id}" />
+                                <input type="hidden" name="userLogin" th:value="${userName}" />
+                                <button type="submit">Delete</button>
+                            </form>
+        
+                            <!-- Form for toggling visibility -->
+                            <form th:if="${!feedback.editMode}" th:action="@{/toggleVisibility}" method="post">
+                                <input type="hidden" name="id" th:value="${feedback.id}" />
+                                <input type="hidden" name="isPublic" th:value="${!feedback.isPublic}" />
+                                <input type="hidden" name="userLogin" th:value="${userName}" />
+                                <button type="submit" th:text="${feedback.isPublic ? 'Make Private' : 'Make Public'}"></button>
+                            </form>
+        
+                            <!-- Form for toggling edit mode -->
+                            <form th:if="${!feedback.editMode}" th:action="@{/toggleEditMode}" method="post">
+                                <input type="hidden" name="id" th:value="${feedback.id}" />
+                                <input type="hidden" name="editMode" th:value="true" />
+                                <input type="hidden" name="userLogin" th:value="${userName}" />
+                                <button type="submit">Edit</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <script>    
+        // Get the modals
+        var modal1 = document.getElementById("addfeedbackModal");
+        var modal2 = document.getElementById("myFeedbacksModal");
+
+        // Get the buttons that open the modals
+        var btn1 = document.getElementById("openSpotlightBtn");
+        var btn2 = document.getElementById("openMyFeedbacksBtn");
+
+        // Get the <span> elements that close the modals
+        var span1 = modal1.getElementsByClassName("closeModal")[0];
+        var span2 = modal2.getElementsByClassName("closeModal")[0];
+
+        // Function to open modal 1
+        btn1.onclick = function() {
+            modal1.style.display = "block";
+        }
+
+        // Function to close modal 1
+        span1.onclick = function() {
+            modal1.style.display = "none";
+        }
+
+        // Function to open modal 2
+        btn2.onclick = function() {
+            modal2.style.display = "block";
+        }
+
+        // Function to close modal 2
+        span2.onclick = function() {
+            modal2.style.display = "none";
+        }
+
+    </script>
+    
 
     <script>
         const carouselList = document.querySelector('.carousel-list');
@@ -162,30 +271,75 @@
         }
 
         startAutomaticTransition();
-
-        const modal = document.getElementById("addfeedbackModal");
-        const btn = document.getElementById("openSpotlightBtn");
-        const span = document.getElementsByClassName("closeModal")[0];
-
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        // Add the event listener for the button click
-        document.getElementById("openMyFeedbacksBtn").addEventListener("click", function() {
-            window.location.href = "userFeedbackDashboard.html";
-        });
     </script>
+    <!-- <script>
+        // Get the modals
+        var modal1 = document.getElementById("addfeedbackModal");
+        var modal2 = document.getElementById("myFeedbacksModal");
+        var thankYouModal = document.getElementById("thankYouModal");
+    
+        // Get the buttons that open the modals
+        var btn1 = document.getElementById("openSpotlightBtn");
+        var btn2 = document.getElementById("openMyFeedbacksBtn");
+    
+        // Get the <span> elements that close the modals
+        var span1 = modal1.getElementsByClassName("closeModal")[0];
+        var span2 = modal2.getElementsByClassName("closeModal")[0];
+        var spanThankYou = thankYouModal.getElementsByClassName("closeModal")[0];
+    
+        // Function to open modal 1
+        btn1.onclick = function() {
+            modal1.style.display = "block";
+        }
+    
+        // Function to close modal 1
+        span1.onclick = function() {
+            modal1.style.display = "none";
+        }
+    
+        // Function to open modal 2
+        btn2.onclick = function() {
+            modal2.style.display = "block";
+        }
+    
+        // Function to close modal 2
+        span2.onclick = function() {
+            modal2.style.display = "none";
+        }
+    
+        // Function to close thank you modal
+        spanThankYou.onclick = function() {
+            thankYouModal.style.display = "none";
+        }
+    
+        // Handle form submission
+        document.getElementById("feedbackForm").onsubmit = function(event) {
+            event.preventDefault(); // Prevent the default form submission
+    
+            var formData = new FormData(this);
+    
+            fetch('/submitFeedback', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    modal1.style.display = "none"; // Close the feedback modal
+                    thankYouModal.style.display = "block"; // Open the thank you modal
+                } else {
+                    // Handle failure (e.g., show an error message)
+                    alert('Submission failed. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script> -->
+    
+
+
 </body>
 
 </html>

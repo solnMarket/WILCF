@@ -1,6 +1,8 @@
 package org.example.admin.controller;
  
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.example.admin.model.FeedbackModel;
 import org.example.admin.service.FeedbackService;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
  
 @Controller
@@ -69,7 +72,7 @@ public String toggleFeedbackSelection(@RequestParam("id") Long id, @RequestParam
         model.addAttribute("feedbacks", feedbackService.getFeedbacksByUser(userLogin));
         return "userFeedbackDashboard";
     }
- 
+    
     @GetMapping("/feedbackDashboard")
     public String feedbackDashboard(Model model) {
         model.addAttribute("feedbacks", feedbackService.getPublicFeedbacks());
@@ -80,6 +83,7 @@ public String toggleFeedbackSelection(@RequestParam("id") Long id, @RequestParam
     public String userPersonalPage(Model model, @RequestParam("userLogin") String userLogin) {
         model.addAttribute("userName", userLogin);
         model.addAttribute("feedbacks", feedbackService.getFeedbacksByUser(userLogin));
+        model.addAttribute("selectedFeedbacks", feedbackService.getSelectedFeedbacks());
         return "userPersonalPage";
     }
  
