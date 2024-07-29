@@ -25,17 +25,22 @@ body {
 
 /* NAV BAR */
 .nav {
-    display: flex; /* Add this line */
+    display: flex;
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Center items vertically */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding-top: 2.5%; /* Add some padding above the nav */
     font-family: arial;
     font-size: 15px;
-    background-color: transparent; /* Default transparent background */
-    transition: background-color 0.3s, padding-top 0.4s; /* Smooth transition for background color */
+    padding-top: 2.5%; /* Add some padding above the nav */
+    padding-right: 10px; /* Add padding to the right */
+    padding-bottom: 10px; /* Add padding to the bottom */
+    padding-left: 10px; /* Add padding to the left */
+    background-color: transparent; /* Or any color you want */
+    transition: background-color 0.3s, padding 0.4s;
 }
 
 .nav.scrolled {
@@ -84,10 +89,18 @@ ul.navbar-links a:hover {
 }
 
 .auth {
-    margin-left: 30%;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    gap: 10px; /* Space between buttons */
+    margin-left: auto; /* Pushes .auth to the right side */
+    margin-right: 5%; /* Add space between .auth and right edge */
+    flex-wrap: wrap; /* Allows buttons to wrap if necessary */
+}
+@media (max-width: 768px) {
+    .auth {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 5px; /* Smaller gap between buttons */
+        margin-left: 0; /* Reset margin for smaller screens */
+    }
 }
 
 .auth a {
