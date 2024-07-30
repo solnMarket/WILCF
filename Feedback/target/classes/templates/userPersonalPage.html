@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/UserDashboard.css">
     <script type="text/javascript" src="/js/script.js"></script>
     <script async src="https://d3kno6bpmj270m.cloudfront.net/widget/userdesk.js" data-userdesk="clwtw2kt70002gsk0xb9dilcp"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body class="body_index">
@@ -280,6 +281,88 @@
 
         startAutomaticTransition();
     </script>
+
+    <script>
+        $(document).ready(function() {
+            // Handle update feedback
+            $(document).on('submit', 'form[action="/personal/updateFeedback"]', function(event) {
+                event.preventDefault();
+                const form = $(this);
+                const formData = form.serialize();
+
+                $.ajax({
+                    type: 'POST',
+                    url: form.attr('action'),
+                    data: formData,
+                    success: function(response) {
+                        location.reload(); // Reload to see the changes (or update the DOM dynamically)
+                    },
+                    error: function(error) {
+                        console.error('Error updating feedback:', error);
+                    }
+                });
+            });
+
+            // Handle toggle edit mode
+            $(document).on('submit', 'form[action="/personal/toggleEditMode"]', function(event) {
+                event.preventDefault();
+                const form = $(this);
+                const formData = form.serialize();
+
+                $.ajax({
+                    type: 'POST',
+                    url: form.attr('action'),
+                    data: formData,
+                    success: function(response) {
+                        location.reload(); // Reload to see the changes (or update the DOM dynamically)
+                    },
+                    error: function(error) {
+                        console.error('Error toggling edit mode:', error);
+                    }
+                });
+            });
+
+            // Handle toggle visibility
+            $(document).on('submit', 'form[action="/personal/toggleVisibility"]', function(event) {
+                event.preventDefault();
+                const form = $(this);
+                const formData = form.serialize();
+
+                $.ajax({
+                    type: 'POST',
+                    url: form.attr('action'),
+                    data: formData,
+                    success: function(response) {
+                        location.reload(); // Reload to see the changes (or update the DOM dynamically)
+                    },
+                    error: function(error) {
+                        console.error('Error toggling visibility:', error);
+                    }
+                });
+            });
+
+            // Handle delete feedback
+            $(document).on('submit', 'form[action="/personal/deleteFeedback"]', function(event) {
+                event.preventDefault();
+                const form = $(this);
+                const formData = form.serialize();
+
+                $.ajax({
+                    type: 'POST',
+                    url: form.attr('action'),
+                    data: formData,
+                    success: function(response) {
+                        location.reload(); // Reload to see the changes (or update the DOM dynamically)
+                    },
+                    error: function(error) {
+                        console.error('Error deleting feedback:', error);
+                    }
+                });
+            });
+        });
+    </script>
+
+
     <!-- <script>
         // Get the modals
         var modal1 = document.getElementById("addfeedbackModal");
