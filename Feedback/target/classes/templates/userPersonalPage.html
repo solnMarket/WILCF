@@ -96,7 +96,7 @@
                 
                 <div class="checkbox-container">
                     <p>Show my name publicly</p>
-                    <input type="checkbox" id="checkboxNameIsPublic" name="isPublic" checked>
+                    <input type="checkbox" id="checkboxNameIsPublic" name="isPublic" >
                 </div>
                 
                 <input type="hidden" name="userLogin" th:value="${userName}" />
@@ -164,7 +164,7 @@
                                 <input type="hidden" name="userLogin" th:value="${userName}" />
                                 <button type="submit">Delete</button>
                             </form>
-        
+    
                             <!-- Form for toggling visibility -->
                             <form th:if="${!feedback.editMode}" th:action="@{/personal/toggleVisibility}" method="post">
                                 <input type="hidden" name="id" th:value="${feedback.id}" />
@@ -172,7 +172,7 @@
                                 <input type="hidden" name="userLogin" th:value="${userName}" />
                                 <button type="submit" th:text="${feedback.isPublic ? 'Make Private' : 'Make Public'}"></button>
                             </form>
-        
+    
                             <!-- Form for toggling edit mode -->
                             <form th:if="${!feedback.editMode}" th:action="@{/personal/toggleEditMode}" method="post">
                                 <input type="hidden" name="id" th:value="${feedback.id}" />
@@ -282,85 +282,59 @@
         startAutomaticTransition();
     </script>
 
-    <script>
-        $(document).ready(function() {
-            // Handle update feedback
-            $(document).on('submit', 'form[action="/personal/updateFeedback"]', function(event) {
-                event.preventDefault();
-                const form = $(this);
-                const formData = form.serialize();
+<script>
+    function openModal() {
+        window.location.href = window.location.pathname + '?modal=open';
+    }
 
-                $.ajax({
-                    type: 'POST',
-                    url: form.attr('action'),
-                    data: formData,
-                    success: function(response) {
-                        location.reload(); // Reload to see the changes (or update the DOM dynamically)
-                    },
-                    error: function(error) {
-                        console.error('Error updating feedback:', error);
-                    }
-                });
-            });
+    $(document).ready(function() {
+        function keepModalOpen() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('modal') === 'open') {
+                $('#myFeedbacksModal').show();
+            }
+        }
 
-            // Handle toggle edit mode
-            $(document).on('submit', 'form[action="/personal/toggleEditMode"]', function(event) {
-                event.preventDefault();
-                const form = $(this);
-                const formData = form.serialize();
+        keepModalOpen();
 
-                $.ajax({
-                    type: 'POST',
-                    url: form.attr('action'),
-                    data: formData,
-                    success: function(response) {
-                        location.reload(); // Reload to see the changes (or update the DOM dynamically)
-                    },
-                    error: function(error) {
-                        console.error('Error toggling edit mode:', error);
-                    }
-                });
-            });
-
-            // Handle toggle visibility
-            $(document).on('submit', 'form[action="/personal/toggleVisibility"]', function(event) {
-                event.preventDefault();
-                const form = $(this);
-                const formData = form.serialize();
-
-                $.ajax({
-                    type: 'POST',
-                    url: form.attr('action'),
-                    data: formData,
-                    success: function(response) {
-                        location.reload(); // Reload to see the changes (or update the DOM dynamically)
-                    },
-                    error: function(error) {
-                        console.error('Error toggling visibility:', error);
-                    }
-                });
-            });
-
-            // Handle delete feedback
-            $(document).on('submit', 'form[action="/personal/deleteFeedback"]', function(event) {
-                event.preventDefault();
-                const form = $(this);
-                const formData = form.serialize();
-
-                $.ajax({
-                    type: 'POST',
-                    url: form.attr('action'),
-                    data: formData,
-                    success: function(response) {
-                        location.reload(); // Reload to see the changes (or update the DOM dynamically)
-                    },
-                    error: function(error) {
-                        console.error('Error deleting feedback:', error);
-                    }
-                });
-            });
+        // Handle the close button
+        $('.closeModal').on('click', function() {
+            $('#myFeedbacksModal').hide();
+            const url = new URL(window.location.href);
+            url.searchParams.delete('modal');
+            window.history.replaceState(null, null, url.toString());
         });
-    </script>
+
+        // Handle AJAX form submissions and keep the modal open
+        function handleFormSubmission(form) {
+            form.on('submit', function(event) {
+                event.preventDefault();
+                const formData = form.serialize();
+                
+                $.ajax({
+                    type: 'POST',
+                    url: form.attr('action'),
+                    data: formData,
+                    success: function(response) {
+                        // Keep the modal open after successful form submission
+                        const url = new URL(window.location.href);
+                        url.searchParams.set('modal', 'open');
+                        window.history.replaceState(null, null, url.toString());
+                        
+                        location.reload(); // Reload to see the changes
+                    },
+                    error: function(error) {
+                        console.error('Error with form submission:', error);
+                    }
+                });
+            });
+        }
+
+        $('form').each(function() {
+            handleFormSubmission($(this));
+        });
+    });
+</script>
 
 
     <!-- <script>
