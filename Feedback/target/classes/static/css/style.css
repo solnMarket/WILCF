@@ -150,7 +150,7 @@ ul.navbar-links a:hover {
 .carousel-container .feedbackText{
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
-    font-size: 28px;
+    font-size: 25px;
 }
 
 .spotlightBtn {
@@ -497,7 +497,7 @@ input[type="checkbox"] {
 
 #careText{
     font-size: 20px;
-    color: #202020;
+    color: #000;
 }
 
 
