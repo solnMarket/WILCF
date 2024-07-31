@@ -283,11 +283,33 @@
     </script>
 
     <script>
+        function openModal() {
+            window.location.href = window.location.pathname + '?modal=open';
+        }
+
         $(document).ready(function() {
-            // Handle update feedback
-            $(document).on('submit', 'form[action="/personal/updateFeedback"]', function(event) {
+        function keepModalOpen() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('modal') === 'open') {
+                $('#myFeedbacksModal').show();
+            }
+        }
+    
+
+        keepModalOpen();
+
+        // Handle the close button
+        $('.closeModal').on('click', function() {
+            $('#myFeedbacksModal').hide();
+            const url = new URL(window.location.href);
+            url.searchParams.delete('modal');
+            window.history.replaceState(null, null, url.toString());
+        });
+
+        // Handle AJAX form submissions and keep the modal open
+        function handleFormSubmission(form) {
+            form.on('submit', function(event) {
                 event.preventDefault();
-                const form = $(this);
                 const formData = form.serialize();
 
                 $.ajax({
@@ -295,139 +317,93 @@
                     url: form.attr('action'),
                     data: formData,
                     success: function(response) {
-                        location.reload(); // Reload to see the changes (or update the DOM dynamically)
+                         // Keep the modal open after successful form submission
+                         const url = new URL(window.location.href);
+                        url.searchParams.set('modal', 'open');
+                        window.history.replaceState(null, null, url.toString());
+                        
+                        location.reload(); // Reload to see the changes
                     },
                     error: function(error) {
-                        console.error('Error updating feedback:', error);
+                        console.error('Error with form submission:', error);
                     }
                 });
             });
-
-            // Handle toggle edit mode
-            $(document).on('submit', 'form[action="/personal/toggleEditMode"]', function(event) {
-                event.preventDefault();
-                const form = $(this);
-                const formData = form.serialize();
-
-                $.ajax({
-                    type: 'POST',
-                    url: form.attr('action'),
-                    data: formData,
-                    success: function(response) {
-                        location.reload(); // Reload to see the changes (or update the DOM dynamically)
-                    },
-                    error: function(error) {
-                        console.error('Error toggling edit mode:', error);
-                    }
-                });
-            });
-
-            // Handle toggle visibility
-            $(document).on('submit', 'form[action="/personal/toggleVisibility"]', function(event) {
-                event.preventDefault();
-                const form = $(this);
-                const formData = form.serialize();
-
-                $.ajax({
-                    type: 'POST',
-                    url: form.attr('action'),
-                    data: formData,
-                    success: function(response) {
-                        location.reload(); // Reload to see the changes (or update the DOM dynamically)
-                    },
-                    error: function(error) {
-                        console.error('Error toggling visibility:', error);
-                    }
-                });
-            });
-
+        }
             // Handle delete feedback
-            $(document).on('submit', 'form[action="/personal/deleteFeedback"]', function(event) {
-                event.preventDefault();
-                const form = $(this);
-                const formData = form.serialize();
-
-                $.ajax({
-                    type: 'POST',
-                    url: form.attr('action'),
-                    data: formData,
-                    success: function(response) {
-                        location.reload(); // Reload to see the changes (or update the DOM dynamically)
-                    },
-                    error: function(error) {
-                        console.error('Error deleting feedback:', error);
-                    }
-                });
+            $('form').each(function() {
+                handleFormSubmission($(this));
             });
         });
+
     </script>
 
 
-    <!-- <script>
-        // Get the modals
-        var modal1 = document.getElementById("addfeedbackModal");
-        var modal2 = document.getElementById("myFeedbacksModal");
-        var thankYouModal = document.getElementById("thankYouModal");
+    // <!--<script>
+    //     // Get the modals
+    //     var modal1 = document.getElementById("addfeedbackModal");
+    //     var modal2 = document.getElementById("myFeedbacksModal");
+    //     var thankYouModal = document.getElementById("thankYouModal");
     
-        // Get the buttons that open the modals
-        var btn1 = document.getElementById("openSpotlightBtn");
-        var btn2 = document.getElementById("openMyFeedbacksBtn");
+    //     // Get the buttons that open the modals
+    //     var btn1 = document.getElementById("openSpotlightBtn");
+    //     var btn2 = document.getElementById("openMyFeedbacksBtn");
     
-        // Get the <span> elements that close the modals
-        var span1 = modal1.getElementsByClassName("closeModal")[0];
-        var span2 = modal2.getElementsByClassName("closeModal")[0];
-        var spanThankYou = thankYouModal.getElementsByClassName("closeModal")[0];
+    //     // Get the <span> elements that close the modals
+    //     var span1 = modal1.getElementsByClassName("closeModal")[0];
+    //     var span2 = modal2.getElementsByClassName("closeModal")[0];
+    //     var spanThankYou = thankYouModal.getElementsByClassName("closeModal")[0];
     
-        // Function to open modal 1
-        btn1.onclick = function() {
-            modal1.style.display = "block";
-        }
+    //     // Function to open modal 1
+    //     btn1.onclick = function() {
+    //         modal1.style.display = "block";
+    //     }
     
-        // Function to close modal 1
-        span1.onclick = function() {
-            modal1.style.display = "none";
-        }
+    //     // Function to close modal 1
+    //     span1.onclick = function() {
+    //         modal1.style.display = "none";
+    //     }
     
-        // Function to open modal 2
-        btn2.onclick = function() {
-            modal2.style.display = "block";
-        }
+    //     // Function to open modal 2
+    //     btn2.onclick = function() {
+    //         modal2.style.display = "block";
+    //     }
     
-        // Function to close modal 2
-        span2.onclick = function() {
-            modal2.style.display = "none";
-        }
+    //     // Function to close modal 2
+    //     span2.onclick = function() {
+    //         modal2.style.display = "none";
+    //     }
     
-        // Function to close thank you modal
-        spanThankYou.onclick = function() {
-            thankYouModal.style.display = "none";
-        }
+    //     // Function to close thank you modal
+    //     spanThankYou.onclick = function() {
+    //         thankYouModal.style.display = "none";
+    //     }
     
-        // Handle form submission
-        document.getElementById("feedbackForm").onsubmit = function(event) {
-            event.preventDefault(); // Prevent the default form submission
+    //     // Handle form submission
+    //     document.getElementById("feedbackForm").onsubmit = function(event) {
+    //         event.preventDefault(); // Prevent the default form submission
     
-            var formData = new FormData(this);
+    //         var formData = new FormData(this);
     
-            fetch('/submitFeedback', {
-                method: 'POST',
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    modal1.style.display = "none"; // Close the feedback modal
-                    thankYouModal.style.display = "block"; // Open the thank you modal
-                } else {
-                    // Handle failure (e.g., show an error message)
-                    alert('Submission failed. Please try again.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
-    </script> -->
+    //         fetch('/submitFeedback', {
+    //             method: 'POST',
+    //             body: formData,
+    //         })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             if (data.success) {
+    //                 modal1.style.display = "none"; // Close the feedback modal
+    //                 thankYouModal.style.display = "block"; // Open the thank you modal
+    //             } else {
+    //                 // Handle failure (e.g., show an error message)
+    //                 alert('Submission failed. Please try again.');
+    //             }
+    //         })
+    //         .catch(error => {
+    //             console.error('Error:', error);
+    //         });
+    //     }
+    // </script> -->
     
 
 
